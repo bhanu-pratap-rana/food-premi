@@ -1,0 +1,4557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Premi - Naturally Nutritious Menu</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #388E3C;
+            --accent-color: #8BC34A;
+            --forest-green: #1A5334;
+            --banner-yellow: #F7B71D;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --hover-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            text-align: center;
+            padding: 35px 0 50px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.1) inset;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 18s infinite ease-in-out alternate;
+            opacity: 0.8;
+        }
+        
+        /* Food icon decorations with enhanced styling */
+        .food-icon {
+            position: absolute;
+            opacity: 0.2;
+            filter: brightness(2.5);
+            z-index: 1;
+            animation: float 6s infinite ease-in-out;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .food-icon:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            font-size: 28px;
+            animation-delay: 0s;
+        }
+
+        .food-icon:nth-child(2) {
+            top: 60%;
+            left: 15%;
+            font-size: 22px;
+            animation-delay: 0.5s;
+        }
+
+        .food-icon:nth-child(3) {
+            top: 25%;
+            right: 15%;
+            font-size: 24px;
+            animation-delay: 1s;
+        }
+
+        .food-icon:nth-child(4) {
+            top: 65%;
+            right: 10%;
+            font-size: 26px;
+            animation-delay: 1.5s;
+        }
+
+        .food-icon:nth-child(5) {
+            top: 45%;
+            left: 30%;
+            font-size: 20px;
+            animation-delay: 2s;
+        }
+
+        .food-icon:nth-child(6) {
+            top: 35%;
+            right: 30%;
+            font-size: 18px;
+            animation-delay: 2.5s;
+        }
+
+        .food-icon:nth-child(7) {
+            top: 20%;
+            left: 40%;
+            font-size: 24px;
+            animation-delay: 1.2s;
+        }
+
+        .food-icon:nth-child(8) {
+            top: 70%;
+            left: 45%;
+            font-size: 19px;
+            animation-delay: 2.8s;
+        }
+
+        .food-icon:nth-child(9) {
+            top: 15%;
+            right: 40%;
+            font-size: 22px;
+            animation-delay: 3.3s;
+        }
+
+        .food-icon:nth-child(10) {
+            top: 55%;
+            right: 35%;
+            font-size: 26px;
+            animation-delay: 1.8s;
+        }
+
+        .food-icon:nth-child(11) {
+            top: 75%;
+            right: 25%;
+            font-size: 20px;
+            animation-delay: 2.2s;
+        }
+
+        .food-icon:nth-child(12) {
+            top: 30%;
+            left: 22%;
+            font-size: 23px;
+            animation-delay: 3.5s;
+        }
+
+        .food-icon:nth-child(13) {
+            top: 40%;
+            right: 50%;
+            font-size: 21px;
+            animation-delay: 0.8s;
+        }
+
+        .food-icon:nth-child(14) {
+            top: 50%;
+            left: 50%;
+            font-size: 25px;
+            animation-delay: 1.3s;
+        }
+
+        .food-icon:nth-child(15) {
+            top: 85%;
+            right: 15%;
+            font-size: 20px;
+            animation-delay: 2.7s;
+        }
+
+        /* Enhanced animation for the icons */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(3deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            75% { transform: translateY(-8px) rotate(3deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(3%, 2%) scale(1.05); }
+            66% { transform: translate(-2%, 5%) scale(0.98); }
+            100% { transform: translate(3%, 0%) scale(1.02); }
+        }
+        
+        @keyframes wave-animation {
+            0% { background-position: 0% 0; }
+            100% { background-position: 100% 0; }
+        }
+        
+        /* Enhanced header title and tagline */
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4.2rem;
+            margin-bottom: 10px;
+            position: relative;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.3);
+            animation: fadeInDown 1.2s ease-out;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+        
+        header p {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.8px;
+            animation: fadeInUp 1.2s ease-out;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tagline-motto {
+            font-family: 'Pacifico', cursive !important;
+            font-size: 1.4rem !important;
+            font-weight: 400 !important;
+            font-style: normal !important;
+            letter-spacing: 0.5px !important;
+            text-transform: uppercase;
+            color: var(--white) !important;
+            margin-top: 15px !important;
+            animation: fadeInUp 1.5s ease-out !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4) !important;
+            border: 2px solid var(--white);
+            padding: 8px 20px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: inline-block;
+        }
+        
+        /* Enhanced wave decoration */
+        .wave-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23FFFFFF"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%23FFFFFF"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23FFFFFF"/></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 -4px 3px rgba(0,0,0,0.07));
+            animation: wave-animation 12s linear infinite alternate;
+        }
+        
+        /* Add floating sparkles for enhanced visual effect */
+        .sparkle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            animation: sparkle-float 6s ease-in-out infinite;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
+        }
+        
+        @keyframes sparkle-float {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-20px) scale(0.8); opacity: 0.3; }
+        }
+        
+        /* Enhanced logo styling */
+        .logo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-color: white;
+            padding: 5px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3), 0 0 0 3px rgba(255,255,255,0.8);
+            border: 3px solid rgba(255,255,255,0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: pulse-shadow 3s infinite ease-in-out;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Enhanced logo animation */
+        @keyframes pulse-shadow {
+            0%, 100% { box-shadow: 0 8px 16px rgba(0,0,0,0.3), 0 0 0 3px rgba(255,255,255,0.8); }
+            50% { box-shadow: 0 12px 24px rgba(0,0,0,0.4), 0 0 0 5px rgba(255,255,255,0.9); }
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .logo:hover img {
+            transform: rotate(-5deg);
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        /* Delivery Offer Banner Styles */
+        .delivery-banner {
+            background: linear-gradient(45deg, #FF6B35, #F7931E, #FFD23F, #F7931E, #FF6B35);
+            background-size: 400% 400%;
+            animation: gradient-shift 4s ease infinite;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 12px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 999;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .banner-content {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .scrolling-text {
+            display: inline-block;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            animation: scroll-left 25s linear infinite;
+            padding-left: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes scroll-left {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .delivery-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(255,255,255,0.3) 50%, 
+                rgba(255,255,255,0.1) 100%);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Hover effect to pause scrolling */
+        .delivery-banner:hover .scrolling-text {
+            animation-play-state: paused;
+        }
+
+        .delivery-banner:hover {
+            cursor: pointer;
+            transform: scale(1.01);
+            transition: transform 0.2s ease;
+        }
+        
+        .menu-navigation {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            padding: 10px;
+            background-color: rgba(249, 249, 249, 0.9);
+            border-radius: 50px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+        }
+        
+        .menu-nav-item {
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .menu-nav-item i {
+            font-size: 0.9rem;
+        }
+        
+        .menu-nav-item:hover, .menu-nav-item.active {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .category-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px;
+            position: relative;
+        }
+        
+        .category-title {
+            color: var(--secondary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--accent-color);
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .menu-item {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .menu-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .item-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .item-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.3));
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            transform: scale(1.15); /* Start zoomed in for zoom out effect */
+            background-color: #f0f0f0;
+        }
+
+        .item-image img.loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        .item-image img.error {
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .item-image::before {
+            content: '🍽️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            z-index: 1;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .menu-item:hover .item-image img {
+            transform: scale(1.0); /* Zoom out on hover */
+        }
+        
+        .item-content {
+            padding: 22px;
+        }
+        
+        .item-name {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .item-name::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .menu-item:hover .item-name::after {
+            width: 60px;
+        }
+        
+        .item-description {
+            color: #666;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+        
+        .item-prices {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #f5f5f5, #fafafa);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover .item-prices {
+            background: linear-gradient(135deg, #f0f7f0, #f5f5f5);
+        }
+        
+        .price-option {
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .menu-item:hover .price-option:hover {
+            transform: translateY(-3px);
+        }
+        
+        .size-label {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+        
+        /* Add to Cart Button Styles */
+        .add-to-cart {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+            opacity: 0;
+            transform: translateY(10px);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .price-option:hover .add-to-cart {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .add-to-cart i {
+            margin-right: 4px;
+        }
+        
+        .add-to-cart.added {
+            background-color: #2E7D32;
+            animation: pulse-success 0.5s;
+        }
+        
+        @keyframes pulse-success {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* WhatsApp Ordering Button Styles */
+        .whatsapp-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            color: var(--primary-color);
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid var(--primary-color);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            animation: whatsapp-pulse 3s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+            text-decoration: none;
+            color: var(--primary-color);
+            background: var(--white);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.2rem;
+            animation: whatsapp-icon-bounce 2s infinite ease-in-out;
+        }
+
+        .whatsapp-text {
+            white-space: nowrap;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes whatsapp-pulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(76, 175, 80, 0.25);
+            }
+        }
+
+        @keyframes whatsapp-icon-bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Shopping Cart Styles */
+        .cart-icon {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: var(--white);
+            color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid var(--primary-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+            background-color: var(--white);
+            color: var(--secondary-color);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.25);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(3px);
+        }
+
+        .cart-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cart-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .cart-close:hover {
+            color: var(--primary-color);
+            background-color: #f0f0f0;
+        }
+
+        .cart-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-title::before {
+            content: "\f07a";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 12px;
+            color: var(--primary-color);
+        }
+
+        .cart-items {
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .cart-item-size {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-quantity {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .quantity-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .quantity-value {
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        .cart-remove {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .cart-summary {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .clear-cart, .proceed-checkout {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .clear-cart {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+
+        .clear-cart:hover {
+            background-color: #e0e0e0;
+        }
+
+        .proceed-checkout {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .proceed-checkout:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+        }
+
+        .cart-empty i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        /* Checkout Modal Styles */
+        .checkout-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            backdrop-filter: blur(3px);
+        }
+
+        .checkout-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .checkout-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .checkout-close:hover {
+            color: var(--primary-color);
+            background-color: #f0f0f0;
+        }
+
+        .checkout-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Modified QR code to only show the actual QR code */
+        .payment-qr {
+            margin: 30px auto;
+            width: 600px;
+            height: 600px;
+            border: 8px solid white;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            max-width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        .payment-qr:hover {
+            transform: scale(1.03);
+        }
+
+        .payment-qr img {
+            width: 95%;
+            height: 95%;
+            object-fit: contain;
+        }
+
+        /* Fixed alignment for order items in checkout */
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .order-item span:first-child {
+            flex: 1;
+            text-align: left;
+        }
+
+        .order-item span:last-child {
+            flex: 0 0 auto;
+            text-align: right;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .payment-instructions {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .confirm-payment {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .confirm-payment::before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 8px;
+        }
+
+        .confirm-payment:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Order Confirmation Modal */
+        .confirmation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 4000;
+            backdrop-filter: blur(5px);
+        }
+
+        .confirmation-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 400px;
+            padding: 35px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: scale-in 0.4s ease;
+        }
+
+        @keyframes scale-in {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .confirmation-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            animation: success-pulse 2s infinite;
+        }
+
+        @keyframes success-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .confirmation-message {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .back-to-menu {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto 0;
+        }
+
+        .back-to-menu::before {
+            content: "\f0d8";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 8px;
+        }
+
+        .back-to-menu:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Order item styling */
+        .order-items {
+            margin-bottom: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+        
+        .order-summary {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .order-summary h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .order-total {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            color: var(--secondary-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+            border-radius: var(--border-radius);
+        }
+        
+        /* Badge for popular items */
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+
+
+        .goal-selection {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .goal-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .goal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .goal-option {
+            background-color: var(--white);
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .goal-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .goal-option.active {
+            border-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .goal-option i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .goal-option.active i {
+            color: var(--white);
+        }
+
+        .goal-option span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .goal-option.active span {
+            color: var(--white);
+        }
+
+
+
+
+
+
+
+
+
+
+        .no-plan-selected {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+
+        .selection-prompt {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+        }
+
+        .selection-prompt i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .selection-prompt h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+                 .selection-prompt p {
+             font-size: 1rem;
+             line-height: 1.5;
+             max-width: 400px;
+         }
+
+         
+
+         .item-name {
+             display: flex;
+             align-items: center;
+             gap: 12px;
+             font-weight: 500;
+         }
+
+         
+
+         
+
+         
+
+         
+         
+         @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tagline-motto {
+                font-size: 1.1rem !important;
+                letter-spacing: 1px !important;
+                padding: 6px 15px !important;
+                margin-top: 10px !important;
+            }
+            
+            .menu-nav-item {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .menu-navigation {
+                top: 10px;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 10px;
+            }
+            
+            header {
+                padding: 25px 0 40px;
+            }
+            
+            .cart-icon {
+                width: 45px;
+                height: 45px;
+                top: 75px;
+            }
+
+            /* WhatsApp Button Responsive */
+            .whatsapp-btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+                top: 15px;
+                right: 15px;
+            }
+
+                        .whatsapp-btn i {
+                font-size: 1.1rem;
+            }
+
+            /* Delivery Banner Responsive */
+            .delivery-banner {
+                padding: 10px 0;
+            }
+
+            .scrolling-text {
+                font-size: 0.9rem;
+                animation: scroll-left 20s linear infinite;
+            }
+              
+            .payment-qr {
+                width: 400px;
+                height: 400px;
+            }
+
+
+        }
+        
+        @media (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            .tagline-motto {
+                font-size: 1rem !important;
+                letter-spacing: 0.5px !important;
+                padding: 5px 12px !important;
+                margin-top: 8px !important;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .item-prices {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 15px;
+                background: #f5f5f5;
+                border-radius: var(--border-radius);
+                padding: 12px;
+            }
+            
+            .price-option {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            
+            .price-option:last-child {
+                border-bottom: none;
+            }
+            
+            .price-option .size-label {
+                font-weight: 500;
+                color: #333;
+                margin-right: 4px;
+            }
+            
+            .price-option .price {
+                color: var(--secondary-color);
+                font-weight: bold;
+                margin-right: auto;
+                margin-left: 10px;
+            }
+            
+            .add-to-cart {
+                opacity: 1;
+                transform: translateY(0);
+                width: auto;
+                padding: 8px 20px;
+                border-radius: 30px;
+                background-color: var(--primary-color);
+                margin-top: 0;
+                font-size: 14px;
+            }
+            
+            .menu-navigation {
+                border-radius: var(--border-radius);
+                flex-direction: row;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 10px;
+                scrollbar-width: none; /* Firefox */
+                margin-bottom: 20px;
+                position: relative;
+                top: 0;
+            }
+            
+            .menu-navigation::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Edge */
+            }
+            
+            .menu-nav-item {
+                white-space: nowrap;
+                font-size: 0.85rem;
+                padding: 8px 16px;
+            }
+            
+            .logo {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 5px;
+            }
+            
+            .category-title {
+                font-size: 1.5rem;
+            }
+            
+            .item-image {
+                height: 180px;
+            }
+            
+            .item-name {
+                font-size: 1.2rem;
+            }
+            
+            .cart-icon {
+                width: 40px;
+                height: 40px;
+                right: 15px;
+                top: 65px;
+            }
+
+            /* WhatsApp Button Mobile */
+            .whatsapp-btn {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+                top: 15px;
+                right: 15px;
+            }
+
+            .whatsapp-text {
+                display: none; /* Hide text on mobile, show only icon */
+            }
+
+            .whatsapp-btn i {
+                font-size: 1.3rem;
+            }
+
+            /* Delivery Banner Mobile */
+            .delivery-banner {
+                padding: 8px 0;
+            }
+
+            .scrolling-text {
+                font-size: 0.85rem;
+                animation: scroll-left 18s linear infinite;
+            }
+            
+            .cart-content, .checkout-content, .confirmation-content {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .payment-qr {
+                width: 250px;
+                height: 250px;
+                border-width: 5px;
+            }
+
+
+
+
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 360px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            .tagline-motto {
+                font-size: 0.9rem !important;
+                letter-spacing: 0.5px !important;
+                padding: 4px 10px !important;
+                margin-top: 6px !important;
+            }
+            
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .item-content {
+                padding: 15px;
+            }
+            
+            .menu-nav-item {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .cart-icon {
+                width: 35px;
+                height: 35px;
+                top: 60px;
+            }
+
+            /* WhatsApp Button Extra Small */
+            .whatsapp-btn {
+                padding: 8px 12px;
+                font-size: 0.75rem;
+                top: 12px;
+                right: 12px;
+            }
+
+            .whatsapp-btn i {
+                font-size: 1.2rem;
+            }
+
+            /* Delivery Banner Extra Small */
+            .delivery-banner {
+                padding: 6px 0;
+            }
+
+            .scrolling-text {
+                font-size: 0.8rem;
+                animation: scroll-left 15s linear infinite;
+            }
+            
+            .payment-qr {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .add-to-cart {
+                padding: 6px 16px;
+                font-size: 13px;
+            }
+            
+            .price-option {
+                padding: 6px 0;
+            }
+            
+            .price-option .size-label {
+                font-size: 0.85rem;
+            }
+            
+            .price-option .price {
+                font-size: 0.95rem;
+            }
+
+
+
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <!-- Food icon decorations -->
+            <i class="food-icon fas fa-apple-alt"></i>
+            <i class="food-icon fas fa-carrot"></i>
+            <i class="food-icon fas fa-leaf"></i>
+            <i class="food-icon fas fa-pepper-hot"></i>
+            <i class="food-icon fas fa-seedling"></i>
+            <i class="food-icon fas fa-lemon"></i>
+            <i class="food-icon fas fa-cheese"></i>
+            <i class="food-icon fas fa-bread-slice"></i>
+            <i class="food-icon fas fa-coffee"></i>
+            <i class="food-icon fas fa-pizza-slice"></i>
+            <i class="food-icon fas fa-cookie"></i>
+            <i class="food-icon fas fa-ice-cream"></i>
+            <i class="food-icon fas fa-seedling"></i>
+            <i class="food-icon fas fa-carrot"></i>
+            <i class="food-icon fas fa-apple-alt"></i>
+            
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://i.pinimg.com/736x/4d/89/c4/4d89c41c38b792db350d2b56096c9a5d.jpg" alt="Food Premi Logo">
+                </div>
+                <h1>Food Premi</h1>
+                <p class="tagline-motto">GOOD FOR BODY, GREAT FOR SOUL</p>
+            </div>
+            
+            <!-- Wave decoration at bottom -->
+            <div class="wave-bottom"></div>
+        </div>
+    </header>
+
+    <!-- Delivery Offer Banner -->
+    <div class="delivery-banner">
+        <div class="banner-content">
+            <div class="scrolling-text">
+                🎉 Free Delivery on Orders Above ₹250! Order Now! &nbsp;&nbsp;&nbsp; 🚚 Fast & Fresh Delivery to Your Doorstep! &nbsp;&nbsp;&nbsp; 🎉 Free Delivery on Orders Above ₹250! Order Now! &nbsp;&nbsp;&nbsp; 🚚 Fast & Fresh Delivery to Your Doorstep! &nbsp;&nbsp;&nbsp; 🎉 Free Delivery on Orders Above ₹250! Order Now! &nbsp;&nbsp;&nbsp; 🚚 Fast & Fresh Delivery to Your Doorstep! &nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <nav class="menu-navigation">
+            <a href="#sandwiches" class="menu-nav-item active"><i class="fas fa-bread-slice"></i> Sandwiches</a>
+            <a href="#sprouts" class="menu-nav-item"><i class="fas fa-seedling"></i> Sprouts</a>
+            <a href="#drinks" class="menu-nav-item"><i class="fas fa-glass-cheers"></i> Drinks</a>
+            <a href="#main-meals" class="menu-nav-item"><i class="fas fa-utensils"></i> Main Meals</a>
+            <a href="#snacks" class="menu-nav-item"><i class="fas fa-cookie-bite"></i> Healthy Snacks</a>
+            <a href="#salads" class="menu-nav-item"><i class="fas fa-leaf"></i> Veg Salads</a>
+
+        </nav>
+        
+        <!-- SANDWICHES SECTION -->
+        <section id="sandwiches" class="category-section">
+            <h2 class="category-title">SANDWICHES</h2>
+            <div class="menu-grid">
+                <!-- Sandwich Item 1 -->
+                <div class="menu-item">
+                    <span class="badge">Popular</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/6b/79/d8/6b79d80d88b53a717843b891f7415d67.jpg" alt="Paneer Sandwich">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Sandwich</h3>
+                        <p class="item-description">Fresh paneer with garden vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                                <button class="add-to-cart" data-name="Paneer Sandwich" data-price="60" data-size="Small" data-image="https://i.pinimg.com/474x/6b/79/d8/6b79d80d88b53a717843b891f7415d67.jpg">
+                                    <i class="fas fa-cart-plus"></i> Add
+                                </button>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                                <button class="add-to-cart" data-name="Paneer Sandwich" data-price="80" data-size="Medium" data-image="https://i.pinimg.com/474x/6b/79/d8/6b79d80d88b53a717843b891f7415d67.jpg">
+                                    <i class="fas fa-cart-plus"></i> Add
+                                </button>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹100</div>
+                                <button class="add-to-cart" data-name="Paneer Sandwich" data-price="100" data-size="Large" data-image="https://i.pinimg.com/474x/6b/79/d8/6b79d80d88b53a717843b891f7415d67.jpg">
+                                    <i class="fas fa-cart-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sandwich Item 2 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/a3/be/0f/a3be0f101a3d4254ddc8674cc5b411b7.jpg" alt="Tofu Sandwich">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Tofu Sandwich</h3>
+                        <p class="item-description">Seasoned tofu with leafy greens</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹110</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sandwich Item 3 -->
+                <div class="menu-item">
+                    <span class="badge">Best Seller</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/3f/29/7b/3f297bd8ec9b3f7015efec90534addd2.jpg" alt="Cheese Corn Sandwich">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Cheese Corn Sandwich</h3>
+                        <p class="item-description">Melted cheese with sweet corn</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹80</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+                <!-- Sandwich Item 5 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/a6/4f/44/a64f44f76fcbdb446e8a9244e4b5bf17.jpg" alt="Peanut Butter Sandwich">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Peanut Butter Sandwich</h3>
+                        <p class="item-description">Creamy peanut butter spread</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹30</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹40</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹50</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paneer Wrap -->
+                <div class="menu-item">
+                    <span class="badge">New</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/cf/d3/52/cfd352ffce6abbb616838f630fede6d6.jpg" alt="Paneer Wrap with Multigrain Roti">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Wrap with Multigrain Roti</h3>
+                        <p class="item-description">Spiced paneer wrapped in healthy multigrain roti</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cheese Bread -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/9d/1c/f3/9d1cf336a9242de78afa6702d120b6a9.jpg" alt="Cheese Bread">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Cheese Bread</h3>
+                        <p class="item-description">Soft bread with melted cheese</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single</div>
+                                <div class="price">₹40</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double</div>
+                                <div class="price">₹70</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SPROUTS SECTION -->
+        <section id="sprouts" class="category-section">
+            <h2 class="category-title">SPROUTS</h2>
+            <div class="menu-grid">
+                <!-- Sprouts Item 1 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/a9/17/87/a91787400c7f5859db199a6b847b629d.jpg" alt="Plain Sprouts">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Plain Sprouts</h3>
+                        <p class="item-description">Fresh mixed sprouts with light seasoning</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹40</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sprouts Item 2 -->
+                <div class="menu-item">
+                    <span class="badge">Protein Rich</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/40/2d/1b/402d1b5b31b34d71f2569c1a9cc83163.jpg" alt="Paneer Sprouts">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Sprouts</h3>
+                        <p class="item-description">Protein-rich sprouts with paneer cubes</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹50</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sprouts Item 3 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/61/70/a6/6170a6d36a79482c14f1130877ab81ad.jpg" alt="Tofu Sprouts">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Tofu Sprouts</h3>
+                        <p class="item-description">Healthy mix of sprouts with tofu pieces</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sprouts Item 4 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/d7/4a/9f/d74a9f132e91d025e302f2b417ebc13c.jpg" alt="Soya Chunks Sprouts">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Soya Chunks Sprouts</h3>
+                        <p class="item-description">Nutritious soya chunks with fresh sprouts</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sprouts Item 5 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/20/5d/60/205d604b31560df8eadf0c7beea87abb.jpg" alt="Sweet Corn Sprouts">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sweet Corn Sprouts</h3>
+                        <p class="item-description">Crunchy sweet corn with mixed sprouts</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sprouts Item 6 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/33/a9/dc/33a9dc80f3f1ddd430e9c99ed6f38f58.jpg" alt="Soya Chunks Paneer Sprouts">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Soya Chunks Paneer Sprouts</h3>
+                        <p class="item-description">Premium sprouts with soya and paneer</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- DRINKS SECTION -->
+        <section id="drinks" class="category-section">
+            <h2 class="category-title">DRINKS</h2>
+            <div class="menu-grid">
+                <!-- Drinks Item 1 -->
+                <div class="menu-item">
+                    <span class="badge">Healthy</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/9b/6e/25/9b6e2552f72dadab5423814c1173b458.jpg" alt="Green Tea">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Green Tea</h3>
+                        <p class="item-description">Refreshing antioxidant-rich tea</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (200ml)</div>
+                                <div class="price">₹30</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (300ml)</div>
+                                <div class="price">₹45</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (400ml)</div>
+                                <div class="price">₹60</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 2 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/c0/eb/b4/c0ebb4be4be01daadfea24ed9efa19df.jpg" alt="Black Coffee">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Black Coffee</h3>
+                        <p class="item-description">Strong aromatic black coffee</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (200ml)</div>
+                                <div class="price">₹30</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (300ml)</div>
+                                <div class="price">₹45</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (400ml)</div>
+                                <div class="price">₹60</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 3 -->
+                <div class="menu-item">
+                    <span class="badge">Popular</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/d3/67/b3/d367b3e37219433a9c92de2c3d1c08ef.jpg" alt="Banana Shake">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Banana Shake</h3>
+                        <p class="item-description">Creamy banana blended shake</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 4 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/49/b6/50/49b650d172f60bd5ac8def9b2087fc63.jpg" alt="Mix Fruit Shake">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Mix Fruit Shake</h3>
+                        <p class="item-description">Blend of seasonal fresh fruits</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹110</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 5 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/6a/d2/63/6ad2633c85db44a56197fff986357cbd.jpg" alt="Dates Shake">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Dates Shake</h3>
+                        <p class="item-description">Sweet and nutritious dates shake</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹110</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 6 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/34/27/10/342710d0af4358d61322329c09cbc494.jpg" alt="Banana Dry Fruit Shake">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Banana Dry Fruit Shake</h3>
+                        <p class="item-description">Creamy banana with nutritious dry fruits</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 7 -->
+                <div class="menu-item">
+                    <span class="badge">Healthy</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/19/a2/aa/19a2aa296859e7783262c1942885a2f0.jpg" alt="Masala Buttermilk (Chhachh)">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Masala Buttermilk (Chhachh)</h3>
+                        <p class="item-description">Refreshing spiced buttermilk with herbs</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (200ml)</div>
+                                <div class="price">₹30</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (300ml)</div>
+                                <div class="price">₹40</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (400ml)</div>
+                                <div class="price">₹50</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 8 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/00/e8/e2/00e8e2d7a72d104b301c4d44064a9707.jpg" alt="Banana Peanut Butter Shake">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Banana Peanut Butter Shake</h3>
+                        <p class="item-description">Rich protein shake with banana and peanut butter</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 9 -->
+                <div class="menu-item">
+                    <span class="badge">Protein Rich</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/d5/88/85/d588850eec9e7ad17d51a0471847a0b7.jpg" alt="Dry Fruit Peanut Butter Shake">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Dry Fruit Peanut Butter Shake</h3>
+                        <p class="item-description">Energy-packed shake with dry fruits and peanut butter</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹130</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Item 10 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/c7/3c/c6/c73cc6c49863705e62551716e2403761.jpg" alt="Sattu Shake">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sattu Shake</h3>
+                        <p class="item-description">Traditional protein-rich shake made with roasted gram flour</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹50</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹80</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Green Detox Smoothie -->
+                <div class="menu-item">
+                    <span class="badge">Detox</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/3c/7b/fa/3c7bfa17084cd437585db18bf740e315.jpg" alt="Green Detox Smoothie">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Green Detox Smoothie</h3>
+                        <p class="item-description">Antioxidant-rich green smoothie for detox</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹140</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹180</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lemon Ginger Honey Water -->
+                <div class="menu-item">
+                    <span class="badge">Detox</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/48/c0/a1/48c0a1e5bb644159a6eaf565107a6440.jpg" alt="Lemon Ginger Honey Water">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Lemon Ginger Honey Water + Soaked Almonds</h3>
+                        <p class="item-description">Detoxifying morning drink with protein-rich almonds</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Regular</div>
+                                <div class="price">₹80</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mixed Vegetable Juice -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/46/41/ea/4641eaae40ac3adc29f6dc16c65d78c8.jpg" alt="Mixed Vegetable Juice">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Mixed Vegetable Juice + Light Salad</h3>
+                        <p class="item-description">Nutrient-dense vegetable juice with fresh salad</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹130</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹160</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hot Coffee -->
+                <div class="menu-item">
+                    <span class="badge">New</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/73/aa/59/73aa597c5c2880c38ad4653dc415d739.jpg" alt="Hot Coffee">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Hot Coffee</h3>
+                        <p class="item-description">Fresh brewed hot coffee with milk</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (200ml)</div>
+                                <div class="price">₹40</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (300ml)</div>
+                                <div class="price">₹55</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (400ml)</div>
+                                <div class="price">₹70</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chocolate Shake -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/90/53/a0/9053a0549866e5428c268fda25ba9dfb.jpg" alt="Chocolate Shake">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Chocolate Shake</h3>
+                        <p class="item-description">Rich and creamy chocolate shake</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (250ml)</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (350ml)</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (450ml)</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sweet Lassi -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/3b/5e/ea/3b5eea129219d6207549e2f92ca1b0e1.jpg" alt="Sweet Lassi">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sweet Lassi</h3>
+                        <p class="item-description">Traditional sweet yogurt drink</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small (200ml)</div>
+                                <div class="price">₹50</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium (300ml)</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large (400ml)</div>
+                                <div class="price">₹90</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- MAIN MEALS SECTION -->
+        <section id="main-meals" class="category-section">
+            <h2 class="category-title">MAIN MEALS</h2>
+            <div class="menu-grid">
+                <!-- Sprouted Moong Chilla -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/39/08/8c/39088cf3deba150f95871c0ca757e14a.jpg" alt="Sprouted Moong Chilla">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sprouted Moong Chilla with Mint Chutney</h3>
+                        <p class="item-description">Protein-rich sprouted moong pancake with fresh mint chutney</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quinoa Khichdi -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/86/72/26/86722632a518328fee21ad33633340dd.jpg" alt="Quinoa Khichdi">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Quinoa Khichdi with Mixed Vegetables</h3>
+                        <p class="item-description">Complete protein quinoa with seasonal vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹160</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹200</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paneer Bhurji -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/25/8d/67/258d6748d7a6b2447d39bb7a13b97ca9.jpg" alt="Paneer Bhurji with Whole Wheat Roti">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Bhurji with Whole Wheat Roti</h3>
+                        <p class="item-description">Scrambled paneer with vegetables and whole wheat roti</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single Roti</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double Roti</div>
+                                <div class="price">₹180</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brown Rice with Vegetables -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/73/72/98/737298bb48f46cbd6e0518d3460a6d80.jpg" alt="Brown Rice with Steamed Vegetables">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Brown Rice with Steamed Vegetables</h3>
+                        <p class="item-description">Fiber-rich brown rice with nutritious steamed vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹130</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹160</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cucumber Mint Raita with Light Khichdi -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/b7/5f/dc/b75fdcb0998defd5d05ab7cda6000b34.jpg" alt="Cucumber Mint Raita with Light Khichdi">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Cucumber and Mint Raita with Light Khichdi</h3>
+                        <p class="item-description">Cooling raita with easy-to-digest khichdi</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vegetable Clear Soup -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/6e/02/ed/6e02eda0a463810c86d66c5905a44350.jpg" alt="Vegetable Clear Soup">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Vegetable Clear Soup</h3>
+                        <p class="item-description">Light and nutritious clear vegetable soup</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Moong Dal Soup -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/7b/d3/c2/7bd3c232118639157777ab0323cb14d1.jpg" alt="Moong Dal Soup">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Moong Dal Soup with Steamed Broccoli</h3>
+                        <p class="item-description">Protein-rich moong dal soup with fresh broccoli</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottle Gourd Soup -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/35/5e/83/355e83fffd988da9c66166bc8c8956dc.jpg" alt="Bottle Gourd Soup">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Bottle Gourd (Lauki) Soup</h3>
+                        <p class="item-description">Light and nutritious bottle gourd soup</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Besan Chilla with Mint Chutney -->
+                <div class="menu-item">
+                    <span class="badge">New</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/3a/8f/8f/3a8f8fccbca098e11454180adc1218a6.jpg" alt="Besan Chilla with Mint Chutney">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Besan Chilla with Mint Chutney</h3>
+                        <p class="item-description">Protein-rich gram flour pancake with fresh mint chutney</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rice with Steamed Vegetables -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/cd/21/04/cd2104c3192c7043ef81dae3e534df12.jpg" alt="Rice with Steamed Vegetables">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Rice with Steamed Vegetables</h3>
+                        <p class="item-description">White rice served with healthy steamed vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vegetable Raita with Light Khichdi -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/3c/89/9c/3c899ce80ec397cda0c3c8e6c11fa167.jpg" alt="Vegetable Raita with Light Khichdi">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Vegetable Raita with Light Khichdi</h3>
+                        <p class="item-description">Fresh vegetable raita with easy-to-digest khichdi</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bread Omelette -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/2c/15/f2/2c15f29c8e4e636696027fb98366b33f.jpg" alt="Bread Omelette">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Bread Omelette</h3>
+                        <p class="item-description">Fluffy omelette served with toasted bread</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">2 Eggs</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">3 Eggs</div>
+                                <div class="price">₹110</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Idli Sambhar -->
+                <div class="menu-item">
+                    <span class="badge">Popular</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/9b/93/a7/9b93a7f53f6e2422a5f3f26a5b489621.jpg" alt="Idli Sambhar">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Idli Sambhar</h3>
+                        <p class="item-description">Soft steamed rice cakes with aromatic lentil soup</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">2 Pieces</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">3 Pieces</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">4 Pieces</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paneer Bhurji with Whole Wheat Paratha -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/39/d7/62/39d76201b7f396dbec275b6ec6584d62.jpg" alt="Paneer Bhurji with Whole Wheat Paratha">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Bhurji with Whole Wheat Paratha</h3>
+                        <p class="item-description">Scrambled paneer with whole wheat flatbread</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single Paratha</div>
+                                <div class="price">₹130</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double Paratha</div>
+                                <div class="price">₹200</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Egg Bhurji with Bread -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/bc/0f/b1/bc0fb132b356530e3cd9544e0ac06356.jpg" alt="Egg Bhurji with Bread">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Egg Bhurji with Bread</h3>
+                        <p class="item-description">Spiced scrambled eggs with toasted bread</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">2 Eggs</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">3 Eggs</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paneer Idli with Sambhar -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/6f/b2/7c/6fb27c81fae59475f323a588f9ee331f.jpg" alt="Paneer Idli with Sambhar">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Idli with Sambhar</h3>
+                        <p class="item-description">Protein-rich paneer idlis with lentil soup</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">2 Pieces</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">3 Pieces</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">4 Pieces</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dal Chawal -->
+                <div class="menu-item">
+                    <span class="badge">Comfort Food</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/be/c9/2b/bec92b9d8961d6c0a972b596e993976a.jpg" alt="Dal Chawal">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Dal Chawal</h3>
+                        <p class="item-description">Classic comfort meal with lentils and rice</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tofu Bhurji with Whole Wheat Roti -->
+                <div class="menu-item">
+                    <span class="badge">Vegan</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/0a/d2/e1/0ad2e1721f5b2dbd0cb3f5005f6b3f3c.jpg" alt="Tofu Bhurji with Whole Wheat Roti">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Tofu Bhurji with Whole Wheat Roti</h3>
+                        <p class="item-description">Vegan scrambled tofu with healthy roti</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single Roti</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double Roti</div>
+                                <div class="price">₹170</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Methi Paratha with Curd -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/af/ba/70/afba703a7e5a78a78685669caf6c2b57.jpg" alt="Methi Paratha with Curd">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Methi Paratha with Curd</h3>
+                        <p class="item-description">Fenugreek leaves stuffed paratha with fresh curd</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single Paratha</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double Paratha</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sambhar Rice -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/fb/4e/ed/fb4eed7777fd8803f9a3539b0e391852.jpg" alt="Sambhar Rice">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sambhar Rice</h3>
+                        <p class="item-description">Aromatic rice cooked with sambhar and vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rava Vegetable Uttapam -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/59/b5/23/59b523426e108dfa1b32745c22938772.jpg" alt="Rava Vegetable Uttapam">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Rava Vegetable Uttapam</h3>
+                        <p class="item-description">Semolina pancake topped with fresh vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peanuts Vegetables Poha -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/fe/0b/f0/fe0bf061e41820232e8c39648c8e9519.jpg" alt="Peanuts Vegetables Poha">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Peanuts Vegetables Poha</h3>
+                        <p class="item-description">Flattened rice with peanuts and mixed vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rava Idli Sambhar -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/6a/7f/37/6a7f3783aa6edcbb3c1615df59f2bb37.jpg" alt="Rava Idli Sambhar">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Rava Idli Sambhar</h3>
+                        <p class="item-description">Semolina idlis with flavorful sambhar</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">2 Pieces</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">3 Pieces</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">4 Pieces</div>
+                                <div class="price">₹110</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Besan Cheela with Green Chutney -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/37/12/09/371209ea5cdcd9faf2306fb138bf9334.jpg" alt="Besan Cheela with Green Chutney">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Besan Cheela with Green Chutney</h3>
+                        <p class="item-description">Gram flour pancake with fresh green chutney</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vegetable Idli Sambhar -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/57/8e/f7/578ef70f88828e5eb771f7b8473ba4a4.jpg" alt="Vegetable Idli Sambhar">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Vegetable Idli Sambhar</h3>
+                        <p class="item-description">Vegetable-loaded idlis with sambhar</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">2 Pieces</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">3 Pieces</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">4 Pieces</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tofu Masala Rice -->
+                <div class="menu-item">
+                    <span class="badge">High Protein</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/b9/78/8a/b9788a00d4ae34358ccb58234c2d9ffa.jpg" alt="Tofu Masala Rice">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Tofu Masala Rice</h3>
+                        <p class="item-description">Spiced tofu cooked with aromatic rice</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹130</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹170</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹210</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vegetable Paneer Uttapam -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/07/2f/1d/072f1d5993f454ac2daff2d878ff2ba3.jpg" alt="Vegetable Paneer Uttapam">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Vegetable Paneer Uttapam</h3>
+                        <p class="item-description">South Indian pancake with vegetables and paneer</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Single</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Double</div>
+                                <div class="price">₹180</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SNACKS SECTION -->
+        <section id="snacks" class="category-section">
+            <h2 class="category-title">HEALTHY SNACKS</h2>
+            <div class="menu-grid">
+                <!-- Snack Item 1 -->
+                <div class="menu-item">
+                    <span class="badge">Popular</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/fc/ec/ce/fcecce1060641b159b34f5dd34c169ff.jpg" alt="Paneer Tawa Masala">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Tawa Masala</h3>
+                        <p class="item-description">Spicy paneer cubes tossed with onion & capsicum</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹160</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹200</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack Item 2 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/6c/23/43/6c2343462df473ff2d0dfe1fce813e0f.jpg" alt="Creamy Pasta">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Creamy Pasta</h3>
+                        <p class="item-description">Classic cheesy pasta in white sauce</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹140</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹180</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack Item 3 -->
+                <div class="menu-item">
+                    <span class="badge">Spicy</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/54/01/41/540141cd12935a41c262caf2fe12fce7.jpg" alt="Spicy Red Sauce Pasta">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Spicy Red Sauce Pasta</h3>
+                        <p class="item-description">Indian-style fiery tomato pasta</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹150</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹190</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack Item 4 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/72/e4/d0/72e4d02833b3b94fbbb529c48cef2e0a.jpg" alt="Masala Macaroni">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Masala Macaroni</h3>
+                        <p class="item-description">Tandoori-style macaroni with Indian spices</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack Item 5 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/d5/bd/eb/d5bdeb55f5cedc380d77aea8f0fd99e0.jpg" alt="Paneer Bhurji Snack">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Bhurji</h3>
+                        <p class="item-description">Scrambled paneer sautéed with veggies</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹140</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹180</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack Item 6 -->
+                <div class="menu-item">
+                    <span class="badge">Vegan</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/ff/e3/5a/ffe35af0c58afa93e60f67903e13642d.jpg" alt="Tofu Tawa Masala">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Tofu Tawa Masala</h3>
+                        <p class="item-description">Tofu cubes with veggies - protein-rich vegan snack</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹150</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹190</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack Item 7 -->
+                <div class="menu-item">
+                    <span class="badge">Healthy</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/97/9b/27/979b2745a50f59143704780f25c0b2a9.jpg" alt="Atta Momos Veg">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Atta Momos (Veg)</h3>
+                        <p class="item-description">Whole wheat veg momos - fiber-rich and healthy</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">6 Pieces</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">8 Pieces</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">12 Pieces</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack Item 8 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/a2/2d/bc/a22dbcc493c87d11022c630cd28957aa.jpg" alt="Atta Momos Paneer">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Atta Momos (Paneer)</h3>
+                        <p class="item-description">Paneer-stuffed momos - rich in protein and taste</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">6 Pieces</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">8 Pieces</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">12 Pieces</div>
+                                <div class="price">₹160</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack Item 9 -->
+                <div class="menu-item">
+                    <span class="badge">Protein Rich</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/12/47/61/12476181cde24db3800b7e2599d9c443.jpg" alt="Atta Momos Tofu">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Atta Momos (Tofu)</h3>
+                        <p class="item-description">Tofu-filled momos - protein-packed and spicy</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">6 Pieces</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">8 Pieces</div>
+                                <div class="price">₹130</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">12 Pieces</div>
+                                <div class="price">₹170</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fruit and Chia Seed Pudding -->
+                <div class="menu-item">
+                    <span class="badge">Superfood</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/43/d4/42/43d442d958ca30ac4a4da9de7d1eb2c4.jpg" alt="Fruit and Chia Seed Pudding">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Fruit and Chia Seed Pudding</h3>
+                        <p class="item-description">Omega-3 rich chia seeds with fresh fruits</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹160</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹200</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Honey Chia Seed Oats Bowl -->
+                <div class="menu-item">
+                    <span class="badge">New</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/9e/9b/cf/9e9bcfb93381dc5768bca560fec7aeec.jpg" alt="Honey Chia Seed Oats Bowl">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Honey Chia Seed Oats Bowl</h3>
+                        <p class="item-description">Nutritious oats bowl with chia seeds and honey</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹140</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹180</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Oats with Peanut Butter and Nuts -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/58/8e/6d/588e6d277bb0959006c66a792b4559da.jpg" alt="Oats with Peanut Butter and Nuts">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Oats with Peanut Butter and Nuts</h3>
+                        <p class="item-description">Protein-rich oats with peanut butter and mixed nuts</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹150</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹190</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SALADS SECTION -->
+        <section id="salads" class="category-section">
+            <h2 class="category-title">VEG SALADS</h2>
+            <div class="menu-grid">
+                <!-- Salad Item 1 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/3a/98/6b/3a986b155103139d0030e6fc0f4b8b75.jpg" alt="Paneer Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Paneer Salad</h3>
+                        <p class="item-description">Fresh vegetables with paneer cubes</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Salad Item 2 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/12/c7/6a/12c76a4fffbafd6f897dc2fd7c56f1e0.jpg" alt="Soya Chunk Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Soya Chunk Salad</h3>
+                        <p class="item-description">Protein-packed soya chunks with fresh greens</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹50</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Salad Item 3 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/474x/1c/cb/d5/1ccbd540db835875ff378aa00df69b81.jpg" alt="Sweet Corn Paneer Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sweet Corn Paneer Salad</h3>
+                        <p class="item-description">Sweet corn kernels with paneer and veggies</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Salad Item 4 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/8c/24/3c/8c243cc8e49925b96f1cac71cd39de6d.jpg" alt="Garden Fresh Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Garden Fresh Salad</h3>
+                        <p class="item-description">Crisp seasonal vegetables with herbs</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Salad Item 5 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/15/53/f5/1553f507ae736176e250efdc12c43b28.jpg" alt="Fruit Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Fruit Salad</h3>
+                        <p class="item-description">Fresh seasonal fruits with honey drizzle</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹75</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹95</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹115</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Salad Item 6 -->
+                <div class="menu-item">
+                    <span class="badge">Popular</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/4a/af/ec/4aafec665f4183c72d7275a083736943.jpg" alt="Sweet Corn Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sweet Corn Salad</h3>
+                        <p class="item-description">Crunchy sweet corn with bell peppers and herbs</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹85</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹110</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Salad Item 7 -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/7c/12/4a/7c124af0d12d0d671eda8b0408515dd1.jpg" alt="Tofu Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Tofu Salad</h3>
+                        <p class="item-description">Fresh vegetables with tofu cubes and light dressing</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grilled Tofu Salad -->
+                <div class="menu-item">
+                    <span class="badge">High Protein</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/ff/5a/01/ff5a01daa4703181e339a8a0d672dc2c.jpg" alt="Grilled Tofu Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Grilled Tofu Salad with Lemon Dressing</h3>
+                        <p class="item-description">Grilled tofu with fresh vegetables and lemon dressing</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹140</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹180</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹220</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chickpea Salad -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/b8/b4/6a/b8b46a9cd3e3dae33983ddc1b80fdb02.jpg" alt="Chickpea Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Chickpea Salad</h3>
+                        <p class="item-description">Protein-rich chickpeas with fresh vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corn Salad with Masala Buttermilk -->
+                <div class="menu-item">
+                    <span class="badge">New</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/ad/6d/1d/ad6d1d6ef5cd15c836419c5e89538088.jpg" alt="Corn Salad with Masala Buttermilk">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Corn Salad with Masala Buttermilk</h3>
+                        <p class="item-description">Fresh corn salad served with spiced buttermilk</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹150</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vegetable Salad with Curd -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/02/4d/73/024d736c1173056822e53b62117f0035.jpg" alt="Vegetable Salad with Curd">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Vegetable Salad with Curd</h3>
+                        <p class="item-description">Mixed vegetables with fresh creamy curd</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹140</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sprouted Kala Chana, Moong Salad -->
+                <div class="menu-item">
+                    <span class="badge">Protein Rich</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/aa/63/e1/aa63e11735864c3ec0d21de4f02ddb23.jpg" alt="Sprouted Kala Chana Moong Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sprouted Kala Chana Moong Salad</h3>
+                        <p class="item-description">High-protein sprouted black chickpeas and moong salad</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹70</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹100</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹130</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Garden Fresh Salad with Tofu Sprouts -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/bf/57/2c/bf572c3ec1e03669d7dd5901469143ae.jpg" alt="Garden Fresh Salad with Tofu Sprouts">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Garden Fresh Salad with Tofu Sprouts</h3>
+                        <p class="item-description">Fresh garden vegetables with protein-rich tofu and sprouts</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹110</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹140</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹170</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sprouted Moong Dal Salad -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/28/58/5d/28585d6deab42f1eca80d4587f03c556.jpg" alt="Sprouted Moong Dal Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sprouted Moong Dal Salad</h3>
+                        <p class="item-description">Nutritious sprouted moong dal with fresh vegetables</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹60</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹90</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹120</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sprouted Moong Salad -->
+                <div class="menu-item">
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/cd/2d/6d/cd2d6d53c7e7e1245d9b8944380f1840.jpg" alt="Sprouted Moong Salad">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Sprouted Moong Salad</h3>
+                        <p class="item-description">Simple and healthy sprouted moong bean salad</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹50</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹80</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹110</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tofu Chana Salad with Curd -->
+                <div class="menu-item">
+                    <span class="badge">High Protein</span>
+                    <div class="item-image">
+                        <img src="https://i.pinimg.com/736x/8b/43/ae/8b43ae22bb8f9cee521dcbd71898b9e2.jpg" alt="Tofu Chana Salad with Curd">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-name">Tofu Chana Salad with Curd</h3>
+                        <p class="item-description">Protein-packed tofu and chickpea salad with curd</p>
+                        <div class="item-prices">
+                            <div class="price-option">
+                                <div class="size-label">Small</div>
+                                <div class="price">₹120</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Medium</div>
+                                <div class="price">₹160</div>
+                            </div>
+                            <div class="price-option">
+                                <div class="size-label">Large</div>
+                                <div class="price">₹200</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+        <footer>
+            <p style="text-align: center; padding: 30px 20px; color: white; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+                © 2025 FoodPremi. All rights reserved.
+            </p>
+        </footer>
+    </div>
+
+    <!-- WhatsApp Ordering Button -->
+    <a href="https://wa.me/+918171203683?text=Hi%2C%20I%27d%20like%20to%20order%20food." target="_blank" class="whatsapp-btn" title="Order via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-text">Order Now</span>
+    </a>
+
+    <!-- Shopping Cart Icon -->
+    <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+    
+    <!-- Shopping Cart Modal -->
+    <div class="cart-modal">
+        <div class="cart-content">
+            <button class="cart-close"><i class="fas fa-times"></i></button>
+            <h2 class="cart-title">Your Shopping Cart</h2>
+            <div class="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+            <div class="cart-summary">
+                <div class="cart-summary-row">
+                    <span>Subtotal:</span>
+                    <span class="subtotal-value">₹0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Tax (5%):</span>
+                    <span class="tax-value">₹0</span>
+                </div>
+                <div class="cart-summary-row cart-total">
+                    <span>Total:</span>
+                    <span class="total-value">₹0</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <button class="clear-cart">Clear Cart</button>
+                <button class="proceed-checkout">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Checkout Modal -->
+    <div class="checkout-modal">
+        <div class="checkout-content">
+            <button class="checkout-close"><i class="fas fa-times"></i></button>
+            <h2 class="checkout-title">Complete Your Order</h2>
+            <div class="order-summary">
+                <h3><i class="fas fa-clipboard-list"></i> Order Summary</h3>
+                <div class="order-items">
+                    <!-- Order items will be added here dynamically -->
+                </div>
+                <div class="order-total">
+                    <strong>Total Amount: </strong><span class="checkout-total-value">₹0</span>
+                </div>
+            </div>
+            <div class="payment-section">
+                <h3><i class="fas fa-qrcode"></i> Scan to Pay</h3>
+                <div class="payment-qr">
+                    <img src="https://i.pinimg.com/736x/9f/04/07/9f0407ccaa7ababed7ac4d572eec94be.jpg" alt="Payment QR Code">
+                </div>
+                <p class="payment-instructions">
+                    <i class="fas fa-info-circle"></i> Please scan the QR code with your payment app to complete your order.
+                    Once payment is complete, click the button below.
+                </p>
+                <button class="confirm-payment">Confirm Payment</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Order Confirmation Modal -->
+    <div class="confirmation-modal">
+        <div class="confirmation-content">
+            <i class="fas fa-check-circle confirmation-icon"></i>
+            <h2 class="confirmation-message">Order Successful!</h2>
+            <p>Thank you for your order. Your food will be ready shortly.</p>
+            <button class="back-to-menu">Back to Menu</button>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Image loading error handling and fallbacks
+        function handleImageError(img) {
+            console.log('Image failed to load:', img.src);
+            
+            // Add error class for styling
+            img.classList.add('error');
+            img.classList.remove('loading');
+            
+            // Create fallback content
+            const fallbackDiv = document.createElement('div');
+            fallbackDiv.style.cssText = `
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #f0f7f0, #e8f5e8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                color: #666;
+                font-size: 14px;
+                text-align: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 2;
+            `;
+            
+            const icon = document.createElement('div');
+            icon.innerHTML = '🍽️';
+            icon.style.fontSize = '48px';
+            icon.style.marginBottom = '8px';
+            
+            const text = document.createElement('div');
+            text.textContent = 'Image not available';
+            
+            fallbackDiv.appendChild(icon);
+            fallbackDiv.appendChild(text);
+            
+            // Insert fallback into image container
+            const container = img.parentElement;
+            if (container && container.classList.contains('item-image')) {
+                container.appendChild(fallbackDiv);
+                img.style.display = 'none';
+            }
+        }
+
+        function handleImageLoad(img) {
+            img.classList.remove('loading', 'error');
+        }
+
+        // Initialize image loading handlers
+        function initializeImages() {
+            const images = document.querySelectorAll('.item-image img, .item-thumb');
+            
+            images.forEach(img => {
+                // Add loading class initially
+                img.classList.add('loading');
+                
+                // Set up event handlers
+                img.addEventListener('load', () => handleImageLoad(img));
+                img.addEventListener('error', () => handleImageError(img));
+                
+                // Check if image is already loaded
+                if (img.complete && img.naturalHeight !== 0) {
+                    handleImageLoad(img);
+                } else if (img.complete && img.naturalHeight === 0) {
+                    handleImageError(img);
+                }
+            });
+        }
+
+        // Active navigation highlighting
+        const navItems = document.querySelectorAll('.menu-nav-item');
+        const sections = document.querySelectorAll('.category-section');
+        
+        // Smooth scrolling for navigation
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = item.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Create animated sparkles in the header
+        function createSparkles() {
+            const header = document.querySelector('header');
+            if (!header) return;
+            
+            const headerRect = header.getBoundingClientRect();
+            
+            // Create 15 sparkles with random positions, sizes and animation delays
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                // Random size between 3px and 7px
+                const size = Math.random() * 4 + 3;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                
+                // Random position within the header
+                const left = Math.random() * (headerRect.width - 20);
+                const top = Math.random() * (headerRect.height - 20);
+                sparkle.style.left = `${left}px`;
+                sparkle.style.top = `${top}px`;
+                
+                // Random animation delay
+                sparkle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                header.appendChild(sparkle);
+            }
+        }
+        
+        // Back to top button visibility
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            // Show/hide back to top button
+            if (backToTopButton && window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else if (backToTopButton) {
+                backToTopButton.classList.remove('visible');
+            }
+            
+            // Highlight active menu section
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').substring(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Back to top functionality
+        if (backToTopButton) {
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Create sparkles when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createSparkles();
+            initializeImages(); // Initialize image error handling
+            
+            // Add animation classes to menu items on load and as they appear in viewport
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            // Initial animation for visible items
+            menuItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animate-in');
+                }, 100 * index);
+            });
+            
+            // Intersection observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            menuItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Add 'Add to Cart' buttons to all menu items
+            const priceOptions = document.querySelectorAll('.price-option');
+            priceOptions.forEach(option => {
+                // Check if 'Add to Cart' button already exists
+                if (!option.querySelector('.add-to-cart')) {
+                    const priceElement = option.querySelector('.price');
+                    const price = priceElement ? priceElement.textContent.replace('₹', '') : '0';
+                    const sizeElement = option.querySelector('.size-label');
+                    const size = sizeElement ? sizeElement.textContent : 'Regular';
+                    
+                    // Find parent menu item to get name and image
+                    const menuItem = option.closest('.menu-item');
+                    const nameElement = menuItem.querySelector('.item-name');
+                    const name = nameElement ? nameElement.textContent : 'Item';
+                    const imageElement = menuItem.querySelector('.item-image img');
+                    const image = imageElement ? imageElement.getAttribute('src') : '';
+                    
+                    // Create Add to Cart button
+                    const addToCartBtn = document.createElement('button');
+                    addToCartBtn.classList.add('add-to-cart');
+                    addToCartBtn.setAttribute('data-name', name);
+                    addToCartBtn.setAttribute('data-price', price);
+                    addToCartBtn.setAttribute('data-size', size);
+                    addToCartBtn.setAttribute('data-image', image);
+                    addToCartBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add';
+                    
+                    // Append button to price option
+                    option.appendChild(addToCartBtn);
+                }
+            });
+
+            // Shopping Cart Functionality
+            let cart = [];
+            
+            // DOM Elements
+            const cartIcon = document.querySelector('.cart-icon');
+            const cartCount = document.querySelector('.cart-count');
+            const cartModal = document.querySelector('.cart-modal');
+            const cartClose = document.querySelector('.cart-close');
+            const cartItems = document.querySelector('.cart-items');
+            const cartEmpty = document.querySelector('.cart-empty');
+            const subtotalValue = document.querySelector('.subtotal-value');
+            const taxValue = document.querySelector('.tax-value');
+            const totalValue = document.querySelector('.total-value');
+            const clearCartBtn = document.querySelector('.clear-cart');
+            const proceedCheckoutBtn = document.querySelector('.proceed-checkout');
+            
+            // Checkout Elements
+            const checkoutModal = document.querySelector('.checkout-modal');
+            const checkoutClose = document.querySelector('.checkout-close');
+            const orderItems = document.querySelector('.order-items');
+            const checkoutTotalValue = document.querySelector('.checkout-total-value');
+            const confirmPaymentBtn = document.querySelector('.confirm-payment');
+            
+            // Confirmation Elements
+            const confirmationModal = document.querySelector('.confirmation-modal');
+            const backToMenuBtn = document.querySelector('.back-to-menu');
+            
+            // Add to Cart Button Click
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart') || e.target.parentElement.classList.contains('add-to-cart')) {
+                    const button = e.target.classList.contains('add-to-cart') ? e.target : e.target.parentElement;
+                    const name = button.getAttribute('data-name');
+                    const price = parseInt(button.getAttribute('data-price'));
+                    const size = button.getAttribute('data-size');
+                    const image = button.getAttribute('data-image');
+                    
+                    addToCart(name, price, size, image);
+                    
+                    // Show brief animation feedback
+                    button.classList.add('added');
+                    setTimeout(() => {
+                        button.classList.remove('added');
+                    }, 1000);
+                }
+            });
+            
+            // Add to Cart Function
+            function addToCart(name, price, size, image) {
+                // Check if item with same name and size already in cart
+                const existingItemIndex = cart.findIndex(item => 
+                    item.name === name && item.size === size
+                );
+                
+                if (existingItemIndex > -1) {
+                    // Increment quantity of existing item
+                    cart[existingItemIndex].quantity += 1;
+                } else {
+                    // Add new item to cart
+                    cart.push({
+                        name: name,
+                        price: price,
+                        size: size,
+                        image: image,
+                        quantity: 1,
+                        id: Date.now() // unique ID
+                    });
+                }
+                
+                // Update cart UI
+                updateCart();
+            }
+            
+            // Update Cart UI
+            function updateCart() {
+                if (!cartCount) return;
+                
+                // Update cart count
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                
+                // Show or hide empty cart message
+                if (cart.length === 0) {
+                    if (cartEmpty) cartEmpty.style.display = 'block';
+                    if (cartItems) cartItems.style.display = 'none';
+                    const cartSummary = document.querySelector('.cart-summary');
+                    const cartActions = document.querySelector('.cart-actions');
+                    if (cartSummary) cartSummary.style.display = 'none';
+                    if (cartActions) cartActions.style.display = 'none';
+                } else {
+                    if (cartEmpty) cartEmpty.style.display = 'none';
+                    if (cartItems) cartItems.style.display = 'block';
+                    const cartSummary = document.querySelector('.cart-summary');
+                    const cartActions = document.querySelector('.cart-actions');
+                    if (cartSummary) cartSummary.style.display = 'block';
+                    if (cartActions) cartActions.style.display = 'flex';
+                    
+                    // Clear current items
+                    if (cartItems) cartItems.innerHTML = '';
+                    
+                    // Add each item to the cart UI
+                    cart.forEach(item => {
+                        const cartItem = document.createElement('div');
+                        cartItem.classList.add('cart-item');
+                        cartItem.setAttribute('data-id', item.id);
+                        
+                        const itemTotal = item.price * item.quantity;
+                        
+                        cartItem.innerHTML = `
+                            <div class="cart-item-image">
+                                <img src="${item.image}" alt="${item.name}">
+                            </div>
+                            <div class="cart-item-details">
+                                <div class="cart-item-name">${item.name}</div>
+                                <div class="cart-item-size">Size: ${item.size}</div>
+                                <div class="cart-item-price">₹${item.price} x ${item.quantity} = ₹${itemTotal}</div>
+                            </div>
+                            <div class="cart-item-actions">
+                                <div class="cart-quantity">
+                                    <button class="quantity-btn quantity-decrease">-</button>
+                                    <span class="quantity-value">${item.quantity}</span>
+                                    <button class="quantity-btn quantity-increase">+</button>
+                                </div>
+                                <button class="cart-remove" data-id="${item.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        
+                        if (cartItems) cartItems.appendChild(cartItem);
+                    });
+                    
+                    // Calculate totals
+                    const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                    const tax = Math.round(subtotal * 0.05);
+                    const total = subtotal + tax;
+                    
+                    // Update summary values
+                    if (subtotalValue) subtotalValue.textContent = `₹${subtotal}`;
+                    if (taxValue) taxValue.textContent = `₹${tax}`;
+                    if (totalValue) totalValue.textContent = `₹${total}`;
+                }
+            }
+            
+            // Cart interactions
+            if (cartItems) {
+                cartItems.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('quantity-increase')) {
+                        const itemId = parseInt(e.target.closest('.cart-item').getAttribute('data-id'));
+                        const itemIndex = cart.findIndex(item => item.id === itemId);
+                        
+                        if (itemIndex > -1) {
+                            cart[itemIndex].quantity += 1;
+                            updateCart();
+                        }
+                    }
+                    
+                    if (e.target.classList.contains('quantity-decrease')) {
+                        const itemId = parseInt(e.target.closest('.cart-item').getAttribute('data-id'));
+                        const itemIndex = cart.findIndex(item => item.id === itemId);
+                        
+                        if (itemIndex > -1) {
+                            if (cart[itemIndex].quantity > 1) {
+                                cart[itemIndex].quantity -= 1;
+                            } else {
+                                cart.splice(itemIndex, 1);
+                            }
+                            updateCart();
+                        }
+                    }
+                    
+                    if (e.target.classList.contains('cart-remove') || e.target.parentElement.classList.contains('cart-remove')) {
+                        const removeBtn = e.target.classList.contains('cart-remove') ? e.target : e.target.parentElement;
+                        const itemId = parseInt(removeBtn.getAttribute('data-id'));
+                        
+                        // Remove item from cart
+                        cart = cart.filter(item => item.id !== itemId);
+                        updateCart();
+                    }
+                });
+            }
+            
+            // Clear Cart Button
+            if (clearCartBtn) {
+                clearCartBtn.addEventListener('click', function() {
+                    cart = [];
+                    updateCart();
+                });
+            }
+            
+            // Cart Modal interactions
+            if (cartIcon) {
+                cartIcon.addEventListener('click', function() {
+                    if (cartModal) {
+                        cartModal.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            }
+            
+            if (cartClose) {
+                cartClose.addEventListener('click', function() {
+                    if (cartModal) {
+                        cartModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+            
+            if (cartModal) {
+                cartModal.addEventListener('click', function(e) {
+                    if (e.target === cartModal) {
+                        cartModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+            
+            // Checkout functionality
+            if (proceedCheckoutBtn) {
+                proceedCheckoutBtn.addEventListener('click', function() {
+                    if (cartModal) cartModal.style.display = 'none';
+                    if (checkoutModal) checkoutModal.style.display = 'flex';
+                    
+                    if (orderItems) {
+                        orderItems.innerHTML = '';
+                        
+                        cart.forEach(item => {
+                            const orderItem = document.createElement('div');
+                            orderItem.classList.add('order-item');
+                            
+                            orderItem.innerHTML = `
+                                <span>${item.name} (${item.size})</span>
+                                <span>₹${item.price} x ${item.quantity}</span>
+                            `;
+                            
+                            orderItems.appendChild(orderItem);
+                        });
+                    }
+                    
+                    // Calculate total
+                    const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0) + 
+                                  Math.round(cart.reduce((total, item) => total + (item.price * item.quantity), 0) * 0.05);
+                    
+                    if (checkoutTotalValue) checkoutTotalValue.textContent = `₹${total}`;
+                });
+            }
+            
+            if (checkoutClose) {
+                checkoutClose.addEventListener('click', function() {
+                    if (checkoutModal) {
+                        checkoutModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+            
+            if (checkoutModal) {
+                checkoutModal.addEventListener('click', function(e) {
+                    if (e.target === checkoutModal) {
+                        checkoutModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+            
+            if (confirmPaymentBtn) {
+                confirmPaymentBtn.addEventListener('click', function() {
+                    if (checkoutModal) checkoutModal.style.display = 'none';
+                    if (confirmationModal) confirmationModal.style.display = 'flex';
+                    
+                    cart = [];
+                    updateCart();
+                });
+            }
+            
+            if (backToMenuBtn) {
+                backToMenuBtn.addEventListener('click', function() {
+                    if (confirmationModal) {
+                        confirmationModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+        });
+
+        // Delivery Banner Click Handler
+        const deliveryBanner = document.querySelector('.delivery-banner');
+        if (deliveryBanner) {
+            deliveryBanner.addEventListener('click', function() {
+                window.open('https://wa.me/+918171203683?text=Hi%2C%20I%27d%20like%20to%20order%20food.', '_blank');
+            });
+        }
+    </script>
+</body>
+</html>

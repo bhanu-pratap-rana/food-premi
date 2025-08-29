@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodPremi Admin - Blogs</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://i.pinimg.com/736x/4d/89/c4/4d89c41c38b792db350d2b56096c9a5d.jpg" alt="Food Premi Logo">
+                </div>
+                <h1>Admin - Blog Manager</h1>
+                <p class="tagline-motto">Manage posts (admin only)</p>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link"><i class="fas fa-utensils"></i> Menu</a>
+                    <a href="dashboard.html" class="nav-link"><i class="fas fa-gauge"></i> Dashboard</a>
+                    <a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    
+                    <!-- Authentication Links -->
+                    <div class="auth-links" id="authLinks">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="category-section">
+            <h2 class="category-title">Create / Edit Post</h2>
+            <div class="menu-grid" style="display:block">
+                <div class="menu-item" style="max-width:900px;margin:0 auto;">
+                    <div class="item-content">
+                        <form id="postForm" style="display:grid;gap:12px;">
+                            <input type="hidden" id="postId" />
+                            <input id="title" placeholder="Title" style="padding:10px;border:1px solid #ddd;border-radius:8px;" required />
+                            <input id="category" placeholder="Category" style="padding:10px;border:1px solid #ddd;border-radius:8px;" />
+                            <input id="image" placeholder="Image URL" style="padding:10px;border:1px solid #ddd;border-radius:8px;" />
+                            <textarea id="excerpt" placeholder="Excerpt" rows="3" style="padding:10px;border:1px solid #ddd;border-radius:8px;"></textarea>
+                            <textarea id="content" placeholder="Content (HTML or text)" rows="6" style="padding:10px;border:1px solid #ddd;border-radius:8px;"></textarea>
+                            <div style="display:flex;gap:10px;justify-content:flex-end;">
+                                <button type="button" id="resetBtn" class="btn outline">Reset</button>
+                                <button type="submit" class="btn primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">Posts</h2>
+            <div id="postsList" class="menu-grid"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p style="text-align:center;padding:20px;">© 2025 FoodPremi Admin</p>
+    </footer>
+
+    <script>
+        const api = {
+            list: () => fetch('/api/blogs').then(r=>r.json()),
+            create: (data) => fetch('/api/blogs', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)}).then(r=>r.json()),
+            update: (id, data) => fetch(`/api/blogs/${id}`, {method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)}).then(r=>r.json()),
+            del: (id) => fetch(`/api/blogs/${id}`, {method:'DELETE'}).then(r=>r.json()),
+            auth: () => fetch('/api/auth-status').then(r=>r.json())
+        };
+
+        function postCard(p) {
+            const id = p._id || p.id;
+            return `
+            <div class="menu-item">
+                <div class="item-image"><img src="${p.image||''}" alt="${p.title||''}"></div>
+                <div class="item-content">
+                    <h3 class="item-name">${p.title||''}</h3>
+                    <p class="item-description">${p.excerpt||''}</p>
+                    <div style="display:flex;gap:8px;justify-content:flex-end;">
+                        <button class="btn outline" data-edit="${id}"><i class="fas fa-pen"></i> Edit</button>
+                        <button class="btn primary" data-del="${id}"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        async function loadPosts() {
+            const listEl = document.getElementById('postsList');
+            listEl.innerHTML = '';
+            const res = await api.list();
+            if (!res.success) { listEl.innerHTML = '<p>Failed to load posts.</p>'; return; }
+            if (!res.data || !res.data.length) { listEl.innerHTML = '<p>No posts yet.</p>'; return; }
+            listEl.innerHTML = res.data.map(postCard).join('');
+        }
+
+        function readForm() {
+            return {
+                title: document.getElementById('title').value.trim(),
+                category: document.getElementById('category').value.trim(),
+                image: document.getElementById('image').value.trim(),
+                excerpt: document.getElementById('excerpt').value.trim(),
+                content: document.getElementById('content').value.trim()
+            };
+        }
+
+        function writeForm(p){
+            document.getElementById('postId').value = p? (p._id||'') : '';
+            document.getElementById('title').value = p?.title||'';
+            document.getElementById('category').value = p?.category||'';
+            document.getElementById('image').value = p?.image||'';
+            document.getElementById('excerpt').value = p?.excerpt||'';
+            document.getElementById('content').value = p?.content||'';
+        }
+
+        async function ensureAdmin() {
+            const s = await api.auth();
+            if (!s.logged_in || !s.is_admin) {
+                alert('Admin only. Please login and enable admin.');
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!await ensureAdmin()) return;
+            await loadPosts();
+
+            document.getElementById('resetBtn').addEventListener('click', () => writeForm(null));
+            document.getElementById('postForm').addEventListener('submit', async (e)=>{
+                e.preventDefault();
+                const id = document.getElementById('postId').value.trim();
+                const data = readForm();
+                if (id) await api.update(id, data); else await api.create(data);
+                writeForm(null);
+                await loadPosts();
+            });
+
+            document.getElementById('postsList').addEventListener('click', async (e)=>{
+                const editId = e.target.closest('[data-edit]')?.getAttribute('data-edit');
+                const delId = e.target.closest('[data-del]')?.getAttribute('data-del');
+                if (editId){
+                    const res = await api.list();
+                    const p = (res.data||[]).find(x=> (x._id||'')===editId);
+                    if (p) writeForm(p);
+                }
+                if (delId){
+                    if (confirm('Delete this post?')){ await api.del(delId); await loadPosts(); }
+                }
+            });
+        });
+    </script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
+
+

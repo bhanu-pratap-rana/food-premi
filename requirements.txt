@@ -1,0 +1,17 @@
+# Database
+pymongo==4.6.1
+python-dotenv==1.0.0
+
+# Web Framework
+flask==3.0.0
+flask-cors==4.0.0
+werkzeug==3.0.1
+
+# Data Handling
+bson==0.5.10
+
+# Development
+python-decouple==3.8
+
+# Security (already included with Flask)
+# werkzeug for password hashing

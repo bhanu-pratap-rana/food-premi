@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodPremi Admin - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://i.pinimg.com/736x/4d/89/c4/4d89c41c38b792db350d2b56096c9a5d.jpg" alt="Food Premi Logo">
+                </div>
+                <h1>Admin Dashboard</h1>
+                <p class="tagline-motto">Overview & quick stats</p>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link"><i class="fas fa-utensils"></i> Menu</a>
+                    <a href="admin.html" class="nav-link"><i class="fas fa-blog"></i> Blog Manager</a>
+                    
+                    <!-- Authentication Links -->
+                    <div class="auth-links" id="authLinks">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="category-section">
+            <h2 class="category-title">Summary</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-content">
+                        <h3 class="item-name"><i class="fas fa-users"></i> Users</h3>
+                        <p class="item-description">Registered users</p>
+                        <div class="item-prices"><div class="price-option"><div class="size-label">Total</div><div class="price" id="usersCount">-</div></div></div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-content">
+                        <h3 class="item-name"><i class="fas fa-blog"></i> Blogs</h3>
+                        <p class="item-description">Total posts</p>
+                        <div class="item-prices"><div class="price-option"><div class="size-label">Total</div><div class="price" id="blogsCount">-</div></div></div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-content">
+                        <h3 class="item-name"><i class="fas fa-star"></i> Reviews</h3>
+                        <p class="item-description">Item reviews</p>
+                        <div class="item-prices"><div class="price-option"><div class="size-label">Total</div><div class="price" id="reviewsCount">-</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p style="text-align:center;padding:20px;">© 2025 FoodPremi Admin</p>
+    </footer>
+
+    <script>
+        async function ensureAdmin() {
+            const s = await fetch('/api/auth-status').then(r=>r.json());
+            if (!s.logged_in || !s.is_admin) {
+                alert('Admin only. Please login and enable admin.');
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        async function loadSummary(){
+            const res = await fetch('/api/admin/summary').then(r=>r.json());
+            if (!res.success) { alert('Failed to load summary'); return; }
+            document.getElementById('usersCount').textContent = res.counts.users;
+            document.getElementById('blogsCount').textContent = res.counts.blogs;
+            document.getElementById('reviewsCount').textContent = res.counts.reviews;
+        }
+
+        document.addEventListener('DOMContentLoaded', async ()=>{
+            if (!await ensureAdmin()) return;
+            loadSummary();
+        });
+    </script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
+
+
