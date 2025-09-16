@@ -1,0 +1,21 @@
+[
+  {
+    "email": "test@admin.com",
+    "name": "Admin",
+    "password": "scrypt:32768:8:1$FdhR9kMgYvia5yst$36ccd283c36f0d88a29e0fa74a4568319ea0d2e2cdd2402afc953e4e41e513734b99e38672799222581a5be718c32a315e53b5ef58b9f70063530531246d29c7",
+    "role": "admin",
+    "created_at": "2025-09-14 06:08:59.174287",
+    "is_active": true,
+    "_id": "id_000001"
+  },
+  {
+    "email": "admin@foodpremi.com",
+    "name": "Admin",
+    "password": "scrypt:32768:8:1$ydRBWPA4qUfxb4zr$03f2c3f40c378e30c7c3984fdc846c3b211b8f9618a2c47c7d7113604c2e2ee679002feac47283100a16628798216ec7912533fd1d69c0cbc8de7b1a103f2612",
+    "role": "admin",
+    "created_at": "2025-09-14 07:59:16.055300",
+    "is_active": true,
+    "_id": "id_000002",
+    "last_login": "2025-09-14 08:00:25.792550"
+  }
+]

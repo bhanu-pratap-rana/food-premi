@@ -1,0 +1,73 @@
+[
+  {
+    "_id": "item_001",
+    "category": "sandwiches",
+    "name": "Paneer Sandwich",
+    "description": "Fresh paneer with garden vegetables",
+    "image": "https://i.pinimg.com/474x/6b/79/d8/6b79d80d88b53a717843b891f7415d67.jpg",
+    "prices": [
+      {
+        "size": "Small",
+        "price": 60
+      },
+      {
+        "size": "Medium",
+        "price": 80
+      },
+      {
+        "size": "Large",
+        "price": 100
+      }
+    ],
+    "badges": [
+      "Popular"
+    ],
+    "is_available": true,
+    "created_at": "2025-09-14T05:51:47.993898"
+  },
+  {
+    "_id": "item_002",
+    "category": "sprouts",
+    "name": "Mixed Sprouts Salad",
+    "description": "Healthy mix of fresh sprouts with light dressing",
+    "image": "https://i.pinimg.com/736x/a9/17/87/a91787400c7f5859db199a6b847b629d.jpg",
+    "prices": [
+      {
+        "size": "Small",
+        "price": 50
+      },
+      {
+        "size": "Medium",
+        "price": 70
+      },
+      {
+        "size": "Large",
+        "price": 90
+      }
+    ],
+    "badges": [
+      "Healthy",
+      "Fresh"
+    ],
+    "is_available": true,
+    "created_at": "2025-09-14T05:51:47.993898"
+  },
+  {
+    "_id": "item_003",
+    "category": "drinks",
+    "name": "Green Tea",
+    "description": "Antioxidant-rich herbal green tea",
+    "image": "https://i.pinimg.com/474x/9b/6e/25/9b6e2552f72dadab5423814c1173b458.jpg",
+    "prices": [
+      {
+        "size": "Cup",
+        "price": 25
+      }
+    ],
+    "badges": [
+      "Healthy"
+    ],
+    "is_available": true,
+    "created_at": "2025-09-14T05:51:47.993898"
+  }
+]

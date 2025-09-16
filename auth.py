@@ -74,6 +74,8 @@ class UserAuth:
                 "password": hashed_password,
                 "phone": user_data['phone'].strip(),
                 "address": user_data.get('address', '').strip(),
+                # RBAC: default role for registered users
+                "role": "user",
                 "created_at": datetime.utcnow(),
                 "last_login": None,
                 "is_active": True,
@@ -157,6 +159,8 @@ class UserAuth:
                 "user_id": str(user['_id']),
                 "name": user['name'],
                 "email": user['email'],
+                # include role for RBAC
+                "role": user.get('role', 'user'),
                 "phone": user['phone'],
                 "address": user.get('address', ''),
                 "order_count": user.get('order_count', 0),

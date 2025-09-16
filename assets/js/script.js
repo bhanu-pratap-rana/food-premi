@@ -278,6 +278,228 @@ document.addEventListener('DOMContentLoaded', function() {
     // Confirmation Elements
     const confirmationModal = document.querySelector('.confirmation-modal');
     const backToMenuBtn = document.querySelector('.back-to-menu');
+
+    // API base for orders persistence
+    const API_BASE = (window.API_BASE || 'http://localhost:5000/api');
+
+    function computeTotals() {
+        const subtotal = cart.reduce((sum, it) => sum + (it.price * it.quantity), 0);
+        const tax = Math.round(subtotal * 0.05);
+        const total = subtotal + tax;
+        return { subtotal, tax, total };
+    }
+
+    async function persistOrderIfPossible() {
+        try {
+            // Try to persist order for logged-in users
+            const totals = computeTotals();
+            const extras = collectOrderExtras();
+            const payload = {
+                items: cart.map(it => ({
+                    name: it.name,
+                    size: it.size,
+                    price: it.price,
+                    quantity: it.quantity,
+                    image: it.image
+                })),
+                subtotal: totals.subtotal,
+                tax: totals.tax,
+                total_amount: totals.total,
+                channel: 'web',
+                address: extras.address,
+                notes: extras.notes,
+                customer_name: (localStorage.getItem('userName') || (window.__profile && window.__profile.name) || extras.guestName || ''),
+                customer_phone: ((window.__profile && window.__profile.phone) || extras.guestPhone || '')
+            };
+            const res = await fetch(`${API_BASE}/orders`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) return { orderId: null };
+            const json = await res.json();
+            return { orderId: json.order_id || null };
+        } catch (e) {
+            console.warn('Order persistence skipped:', e);
+            return { orderId: null };
+        }
+    }
+
+    function buildWhatsAppMessage(orderId) {
+        const { subtotal, tax, total } = computeTotals();
+        const extras = collectOrderExtras();
+        const userName = (localStorage.getItem('userName') || (window.__profile && window.__profile.name) || extras.guestName || 'Guest');
+        const userPhone = ((window.__profile && window.__profile.phone) || extras.guestPhone || '');
+        let lines = [];
+        lines.push('New order from Food Premi');
+        lines.push(`Name: ${userName}`);
+        if (orderId) lines.push(`Order ID: ${orderId}`);
+        lines.push('');
+        lines.push('Items:');
+        cart.forEach((it, idx) => {
+            const lineTotal = it.price * it.quantity;
+            lines.push(`${idx + 1}) ${it.name} (${it.size}) x ${it.quantity} - Rs ${it.price} = Rs ${lineTotal}`);
+        });
+        lines.push('');
+        lines.push(`Subtotal: Rs ${subtotal}`);
+        lines.push(`Tax (5%): Rs ${tax}`);
+        lines.push(`Total: Rs ${total}`);
+        if (extras.address) lines.push(``);
+        if (extras.address) lines.push(`Address: ${extras.address}`);
+        if (userPhone) lines.push(`Phone: ${userPhone}`);
+        if (extras.notes) lines.push(`Notes: ${extras.notes}`);
+        lines.push('');
+        lines.push('Motto: GOOD FOR BODY, GREAT FOR SOUL');
+        return lines.join('\n');
+    }
+
+    function openWhatsAppWithMessage(orderId) {
+        const phone = '+918171203683';
+        const text = buildWhatsAppMessage(orderId);
+        const url = `https://wa.me/${encodeURIComponent(phone)}?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+    }
+
+    // Ensure address/notes inputs and extra actions exist in checkout
+    function ensureCheckoutExtrasUI(){
+        if (!checkoutModal) return;
+        const container = checkoutModal.querySelector('.checkout-content');
+        if (!container) return;
+        if (!container.querySelector('#orderAddress')){
+            const extras = document.createElement('div');
+            extras.className = 'order-extras';
+            extras.innerHTML = `
+                <div style="margin:10px 0;">
+                    <label style="display:block;margin-bottom:6px;">Delivery Address</label>
+                    <textarea id="orderAddress" rows="2" placeholder="Your address (optional)" style="width:100%;padding:8px;border:1px solid #e0e0e0;border-radius:8px;"></textarea>
+                </div>
+                <div style="margin:10px 0;">
+                    <label style="display:block;margin-bottom:6px;">Notes</label>
+                    <input id="orderNotes" type="text" placeholder="Any special instructions (optional)" style="width:100%;padding:8px;border:1px solid #e0e0e0;border-radius:8px;"/>
+                </div>
+                <div style="display:flex;gap:10px;margin-top:10px;">
+                    <button class="preview-message btn outline" type="button" style="padding:8px 12px;border-radius:8px;">Preview Message</button>
+                    <button class="place-order btn" type="button" style="padding:8px 12px;border-radius:8px;background:#4CAF50;color:#fff;border:none;">Place Order (No WhatsApp)</button>
+                </div>
+            `;
+            container.appendChild(extras);
+        }
+    }
+
+    function collectOrderExtras(){
+        const addressEl = document.getElementById('orderAddress');
+        const notesEl = document.getElementById('orderNotes');
+        return {
+            address: addressEl ? addressEl.value.trim() : '',
+            notes: notesEl ? notesEl.value.trim() : ''
+        };
+    }
+
+    function showMessagePreview(text){
+        // lightweight modal overlay
+        let modal = document.querySelector('.message-preview-modal');
+        if (!modal){
+            modal = document.createElement('div');
+            modal.className = 'message-preview-modal';
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;';
+            modal.innerHTML = `
+                <div style="background:#fff;max-width:600px;width:90%;padding:16px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+                    <h3 style="margin-top:0;">WhatsApp Message Preview</h3>
+                    <textarea class="preview-text" style="width:100%;height:200px;padding:8px;border:1px solid #e0e0e0;border-radius:8px;white-space:pre;">${text}</textarea>
+                    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:10px;">
+                        <button class="copy-btn" style="padding:8px 12px;border-radius:8px;border:1px solid #cfd8dc;background:#fff;">Copy</button>
+                        <button class="close-btn" style="padding:8px 12px;border-radius:8px;background:#4CAF50;color:#fff;border:none;">Close</button>
+                    </div>
+                </div>`;
+            document.body.appendChild(modal);
+            modal.addEventListener('click', (e)=>{
+                if (e.target.classList.contains('close-btn') || e.target === modal){
+                    modal.remove();
+                }
+                if (e.target.classList.contains('copy-btn')){
+                    const t = modal.querySelector('.preview-text');
+                    t.select();
+                    document.execCommand('copy');
+                }
+            });
+        } else {
+            const t = modal.querySelector('.preview-text');
+            t.value = text;
+        }
+    }
+
+    // Enhance checkout UI on open
+    if (proceedCheckoutBtn){
+        proceedCheckoutBtn.addEventListener('click', ()=>{ ensureCheckoutExtrasUI(); prefillAddressFromProfile(); });
+    }
+    if (checkoutModal){
+        checkoutModal.addEventListener('click', (e)=>{
+            if (e.target && (e.target.classList && e.target.classList.contains('preview-message'))){
+                const { address, notes } = collectOrderExtras();
+                // Temporarily include extras in message
+                const id = null;
+                // Monkey patch message builder to add extras content
+                const { subtotal, tax, total } = computeTotals();
+                let message = buildWhatsAppMessage(id);
+                if (address) message += `\nAddress: ${address}`;
+                if (notes) message += `\nNotes: ${notes}`;
+                showMessagePreview(message);
+            }
+            if (e.target && (e.target.classList && e.target.classList.contains('place-order'))){
+                (async () => {
+                    const extras = collectOrderExtras();
+                    try {
+                        const totals = computeTotals();
+                        const payload = {
+                            items: cart.map(it => ({ name: it.name, size: it.size, price: it.price, quantity: it.quantity, image: it.image })),
+                            subtotal: totals.subtotal,
+                            tax: totals.tax,
+                            total_amount: totals.total,
+                            channel: 'web-no-wa',
+                            address: extras.address,
+                            notes: extras.notes,
+                            customer_name: (localStorage.getItem('userName') || (window.__profile && window.__profile.name) || extras.guestName || ''),
+                            customer_phone: ((window.__profile && window.__profile.phone) || extras.guestPhone || '')
+                        };
+                        const res = await fetch(`${API_BASE}/orders`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+                        const json = await res.json();
+                        if (!res.ok || !json.success){
+                            throw new Error(json.message || 'Please login to place an order.');
+                        }
+                        if (checkoutModal) checkoutModal.style.display = 'none';
+                        if (confirmationModal) confirmationModal.style.display = 'flex';
+                        cart = [];
+                        updateCart();
+                    } catch (err){
+                        if (window.authUtils && window.authUtils.showAlert){
+                            window.authUtils.showAlert('error', err.message, 'fas fa-exclamation-circle');
+                        } else {
+                            alert(err.message);
+                        }
+                    }
+                })();
+            }
+        });
+    }
+
+    async function prefillAddressFromProfile(){
+        try {
+            const s = await fetch(`${API_BASE}/auth-status`).then(r=>r.json());
+            if (!s.logged_in) return;
+            const prof = await fetch(`${API_BASE}/profile`).then(r=>r.json());
+            if (prof && prof.success && prof.user && prof.user.address){
+                const el = document.getElementById('orderAddress');
+                if (el && !el.value){ el.value = prof.user.address; }
+            }
+            if (prof && prof.success && prof.user){
+                window.__profile = prof.user;
+                const nameEl = document.getElementById('orderName');
+                const phoneEl = document.getElementById('orderPhone');
+                if (nameEl && !nameEl.value) nameEl.value = prof.user.name || '';
+                if (phoneEl && !phoneEl.value) phoneEl.value = prof.user.phone || '';
+            }
+        } catch(e){ /* ignore */ }
+    }
     
     // Add to Cart Button Click
     document.addEventListener('click', function(e) {
@@ -518,10 +740,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (confirmPaymentBtn) {
-        confirmPaymentBtn.addEventListener('click', function() {
+        confirmPaymentBtn.addEventListener('click', async function() {
             if (checkoutModal) checkoutModal.style.display = 'none';
-            if (confirmationModal) confirmationModal.style.display = 'flex';
-            
+
+            // Persist order if possible, then open WhatsApp with composed message
+            const { orderId } = await persistOrderIfPossible();
+            openWhatsAppWithMessage(orderId);
+
+            if (confirmationModal) {
+                // Inject a quick WhatsApp button in confirmation for retry
+                const wrapper = confirmationModal.querySelector('.confirmation-content');
+                if (wrapper && !wrapper.querySelector('.send-whatsapp')) {
+                    const btn = document.createElement('button');
+                    btn.className = 'send-whatsapp';
+                    btn.innerHTML = '<i class="fab fa-whatsapp"></i> Send Order via WhatsApp';
+                    btn.style.marginRight = '10px';
+                    btn.addEventListener('click', () => openWhatsAppWithMessage(orderId));
+                    const backBtn = wrapper.querySelector('.back-to-menu');
+                    if (backBtn) {
+                        wrapper.insertBefore(btn, backBtn);
+                    } else {
+                        wrapper.appendChild(btn);
+                    }
+                }
+                confirmationModal.style.display = 'flex';
+            }
+
+            // Clear cart after placing order
             cart = [];
             updateCart();
         });
@@ -564,6 +809,63 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch(e) { console.warn('Goal switch init skipped', e); }
 
 
+
+    // Load menu dynamically from API
+    async function loadMenu() {
+        try {
+            const response = await fetch(`${API_BASE}/menu`);
+            const data = await response.json();
+
+            if (data.success && data.data.length > 0) {
+                // Find the first menu grid (main menu section)
+                const menuGrid = document.querySelector('.menu-grid');
+                if (menuGrid) {
+                    // Clear existing static content
+                    menuGrid.innerHTML = '';
+
+                    // Create menu items from API data
+                    data.data.forEach(item => {
+                        const menuItemHTML = `
+                            <div class="menu-item">
+                                ${item.badges ? item.badges.map(badge => `<span class="badge">${badge}</span>`).join('') : ''}
+                                <div class="item-image">
+                                    <img src="${item.image || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${item.name}" onerror="handleImageError(this)" onload="handleImageLoad(this)">
+                                </div>
+                                <div class="item-content">
+                                    <h3 class="item-name">${item.name}</h3>
+                                    <div class="item-rating">
+                                        <span class="item-stars">★★★★★</span>
+                                        <span class="item-rating-text">4.8 (125 reviews)</span>
+                                    </div>
+                                    <p class="item-description">${item.description}</p>
+                                    <div class="item-prices">
+                                        ${item.prices.map(price => `
+                                            <div class="price-option" data-price="${price.price}" data-size="${price.size}">
+                                                <div class="size-label">${price.size}</div>
+                                                <div class="price">₹${price.price}</div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        menuGrid.insertAdjacentHTML('beforeend', menuItemHTML);
+                    });
+
+                    console.log(`Loaded ${data.data.length} menu items from API`);
+                } else {
+                    console.warn('Menu grid not found');
+                }
+            } else {
+                console.warn('No menu data available from API');
+            }
+        } catch (error) {
+            console.error('Failed to load menu from API:', error);
+        }
+    }
+
+    // Load menu on page load
+    loadMenu();
 
     // Collage slider removed per request
 });

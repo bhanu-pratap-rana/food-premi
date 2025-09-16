@@ -2783,7 +2783,25 @@
     
         
     
+    <!-- AI Ask Widget Styles -->
+    <link rel="stylesheet" href="assets/css/ask-widget.css">
+
     <script src="assets/js/navigation.js"></script>
     <script src="assets/js/script.js"></script>
+    <!-- AI Ask Widget Script -->
+    <script src="assets/js/ask-widget.js"></script>
+    <script>
+        // Initialize ask widget with custom configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.AskWidget) {
+                window.foodPremiAskWidget = new AskWidget({
+                    apiEndpoint: 'http://127.0.0.1:5000/api/ask',
+                    placeholder: 'Ask about our organic menu, hours, or dietary options...',
+                    theme: 'light',
+                    position: 'bottom-right'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
