@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Orders - Food Premi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .orders-toolbar { display:flex; gap:12px; align-items:center; margin-bottom:16px; }
+        .orders-list { display:grid; gap:14px; }
+        .order-card { background:#fff; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.06); padding:14px; }
+        .order-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+        .order-id { font-weight:600; color:#1A5334; }
+        .order-meta { color:#666; font-size:12px; }
+        .order-items { margin-top:8px; font-size:13px; }
+        .order-item { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dashed #eee; }
+        .order-item:last-child { border-bottom:none; }
+        .order-footer { display:flex; justify-content:space-between; align-items:center; margin-top:10px; }
+        .order-total { font-weight:600; }
+        .status { padding:4px 8px; border-radius:999px; font-size:12px; background:#e8f5e9; color:#1b5e20; }
+        .status.danger { background:#fdecea; color:#b71c1c; }
+        .status.pending { background:#fff8e1; color:#f57f17; }
+        .admin-controls { display:flex; gap:8px; align-items:center; }
+        select, input[type=text], textarea { padding:6px 8px; border:1px solid #e0e0e0; border-radius:6px; }
+        .btn { background:#4CAF50; color:#fff; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; }
+        .btn.outline { background:#fff; color:#1A5334; border:1px solid #cfd8dc; }
+        .btn.danger { background:#e53935; color:#fff; }
+        .btn.icon { width:34px; height:34px; padding:0; display:inline-flex; align-items:center; justify-content:center; }
+        .empty { text-align:center; color:#666; padding: 30px 0; }
+        .status-badges { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+        .status-badge { background:#f1f8e9; color:#1b5e20; border:1px solid #c5e1a5; padding:4px 8px; border-radius:999px; font-size:12px; }
+        .status-badge.grey { background:#eceff1; color:#37474f; border-color:#cfd8dc; }
+        .status-badge.red { background:#ffebee; color:#b71c1c; border-color:#ffcdd2; }
+        .toolbar-col { display:flex; flex-direction:column; gap:6px; }
+        .status-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-left:auto; }
+        .status-tabs .tab { border:1px solid #cfd8dc; padding:6px 10px; border-radius:999px; background:#fff; cursor:pointer; font-size:12px; }
+        .status-tabs .tab.active { background:#1A5334; color:#fff; border-color:#1A5334; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://i.pinimg.com/736x/4d/89/c4/4d89c41c38b792db350d2b56096c9a5d.jpg" alt="Food Premi Logo">
+                </div>
+                <h1>Admin Orders</h1>
+                <p class="tagline-motto">Manage order workflow</p>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link"><i class="fas fa-utensils"></i> Menu</a>
+                    <a href="dashboard.html" class="nav-link"><i class="fas fa-gauge"></i> Dashboard</a>
+                    <div class="auth-links" id="authLinks"></div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="category-section">
+            <h2 class="category-title">Orders</h2>
+            <div class="orders-toolbar">
+                <div class="toolbar-col">
+                    <label>Status:
+                        <select id="statusFilter">
+                            <option value="all">All</option>
+                            <option value="placed">Placed</option>
+                            <option value="accepted">Accepted</option>
+                            <option value="preparing">Preparing</option>
+                            <option value="ready">Ready</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </label>
+                    <div id="statusBadges" class="status-badges"></div>
+                </div>
+                <input type="text" id="searchBox" placeholder="Search by name/email/id" />
+                <button class="btn outline" id="refreshBtn"><i class="fas fa-rotate"></i> Refresh</button>
+                <div class="status-tabs" id="statusTabs">
+                    <button class="tab active" data-status="all">All</button>
+                    <button class="tab" data-status="placed">Placed</button>
+                    <button class="tab" data-status="accepted">Accepted</button>
+                    <button class="tab" data-status="preparing">Preparing</button>
+                    <button class="tab" data-status="ready">Ready</button>
+                    <button class="tab" data-status="delivered">Delivered</button>
+                    <button class="tab" data-status="cancelled">Cancelled</button>
+                </div>
+            </div>
+            <div id="ordersContainer" class="orders-list"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p style="text-align:center;padding:20px;">© 2025 FoodPremi Admin</p>
+    </footer>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        let orders = [];
+
+        async function mustBeAdmin() {
+            const s = await fetch(`${API_BASE}/auth-status`).then(r=>r.json()).catch(()=>({}));
+            if (!s.logged_in || !s.is_admin) {
+                const el = document.getElementById('ordersContainer');
+                el.innerHTML = `<div class="empty"><p><i class='fas fa-lock'></i> Admin access required. <a href='admin-login.html'>Login as admin</a>.</p></div>`;
+                throw new Error('forbidden');
+            }
+            return s;
+        }
+
+        function fmtDate(iso) {
+            try { return new Date(iso).toLocaleString(); } catch { return iso || ''; }
+        }
+
+        function render() {
+            const el = document.getElementById('ordersContainer');
+            const status = document.getElementById('statusFilter').value;
+            const q = (document.getElementById('searchBox').value || '').toLowerCase();
+            let list = orders;
+            if (status !== 'all') list = list.filter(o => (o.status||'') === status);
+            if (q) list = list.filter(o => (o._id||'').includes(q) || (o.user_name||'').toLowerCase().includes(q) || (o.user_email||'').toLowerCase().includes(q));
+            if (!list.length) { el.innerHTML = `<div class='empty'><p>No orders found.</p></div>`; return; }
+            el.innerHTML = '';
+            list.forEach(o => {
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                const total = (o.total_amount != null ? o.total_amount : 0);
+                const itemsHtml = (o.items||[]).map(it => `<div class='order-item'><span>${it.name} (${it.size}) x ${it.quantity}</span><span>Rs ${it.price*it.quantity}</span></div>`).join('');
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #${o._id}</div>
+                            <div class="order-meta">${fmtDate(o.created_at)} • ${o.user_name || ''} • ${o.user_email || ''}</div>
+                        </div>
+                        <div class="status ${o.status==='cancelled'?'danger': (o.status==='placed'?'pending':'')}">${o.status || 'placed'}</div>
+                    </div>
+                    <div class="order-items">${itemsHtml}</div>
+                    <div class="order-footer">
+                        <div class="order-total">Total: Rs ${total}</div>
+                        <div class="admin-controls">
+                            <select class="status-select" data-id="${o._id}">
+                                ${['placed','accepted','preparing','ready','delivered','cancelled'].map(s => `<option value='${s}' ${o.status===s?'selected':''}>${s}</option>`).join('')}
+                            </select>
+                            <button class="btn outline save-status" data-id="${o._id}"><i class="fas fa-save"></i> Update</button>
+                            <button class="btn icon quick-action" data-id="${o._id}" data-status="accepted" title="Accept"><i class="fas fa-check"></i></button>
+                            <button class="btn icon quick-action" data-id="${o._id}" data-status="ready" title="Ready"><i class="fas fa-bell"></i></button>
+                            <button class="btn icon quick-action" data-id="${o._id}" data-status="delivered" title="Delivered"><i class="fas fa-truck"></i></button>
+                            <button class="btn icon danger quick-action" data-id="${o._id}" data-status="cancelled" title="Cancel"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    ${o.address?`<div class="order-meta">Address: ${o.address}</div>`:''}
+                    ${o.notes?`<div class="order-meta">Notes: ${o.notes}</div>`:''}
+                `;
+                el.appendChild(card);
+            });
+        }
+
+        async function loadOrders() {
+            await mustBeAdmin();
+            const res = await fetch(`${API_BASE}/orders?all=1`).then(r=>r.json());
+            if (!res.success) throw new Error(res.message || 'failed');
+            orders = res.data || [];
+            render();
+        }
+
+        async function updateStatus(id, status, notes) {
+            await mustBeAdmin();
+            const body = { status };
+            if (typeof notes === 'string' && notes.length > 0) body.notes = notes;
+            const res = await fetch(`${API_BASE}/orders/${id}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)}).then(r=>r.json());
+            if (!res.success) throw new Error(res.message || 'update failed');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadOrders();
+            document.getElementById('refreshBtn').addEventListener('click', loadOrders);
+            document.getElementById('statusFilter').addEventListener('change', ()=>{ render(); updateStatusBadges(); updateTabsActive(); });
+            document.getElementById('searchBox').addEventListener('input', ()=>{ render(); updateStatusBadges(); });
+            const tabs = document.getElementById('statusTabs');
+            tabs.addEventListener('click', (e)=>{
+                const t = e.target.closest('.tab');
+                if (!t) return;
+                const s = t.getAttribute('data-status');
+                document.getElementById('statusFilter').value = s;
+                render(); updateStatusBadges(); updateTabsActive();
+            });
+            document.body.addEventListener('click', async (e) => {
+                if (e.target.closest('.save-status')){
+                    const btn = e.target.closest('.save-status');
+                    const id = btn.getAttribute('data-id');
+                    const select = document.querySelector(`.status-select[data-id='${id}']`);
+                    const status = select.value;
+                    try {
+                        await updateStatus(id, status);
+                        await loadOrders();
+                    } catch (err) {
+                        alert('Failed to update: ' + err.message);
+                    }
+                } else if (e.target.closest('.quick-action')) {
+                    const btn = e.target.closest('.quick-action');
+                    const id = btn.getAttribute('data-id');
+                    const status = btn.getAttribute('data-status');
+                    let reason = '';
+                    if (status === 'cancelled'){
+                        if (!confirm('Cancel this order?')) return;
+                        reason = prompt('Cancel reason (optional):') || '';
+                    }
+                    try {
+                        await updateStatus(id, status, reason);
+                        await loadOrders();
+                    } catch (err) {
+                        alert('Failed to update: ' + err.message);
+                    }
+                }
+            });
+        });
+
+        function updateStatusBadges(){
+            const el = document.getElementById('statusBadges');
+            if (!el) return;
+            const statuses = ['placed','accepted','preparing','ready','delivered','cancelled'];
+            const counts = Object.fromEntries(statuses.map(s => [s, 0]));
+            counts['all'] = orders.length;
+            orders.forEach(o => { const s = (o.status||'placed'); if (counts[s] !== undefined) counts[s]++; });
+            el.innerHTML = '';
+            const frag = document.createDocumentFragment();
+            const mk = (label, val, cls='') => { const d = document.createElement('span'); d.className = `status-badge ${cls}`; d.textContent = `${label}: ${val}`; return d; };
+            frag.appendChild(mk('All', counts.all, 'grey'));
+            frag.appendChild(mk('Placed', counts.placed));
+            frag.appendChild(mk('Accepted', counts.accepted));
+            frag.appendChild(mk('Preparing', counts.preparing));
+            frag.appendChild(mk('Ready', counts.ready));
+            frag.appendChild(mk('Delivered', counts.delivered));
+            frag.appendChild(mk('Cancelled', counts.cancelled, 'red'));
+            el.appendChild(frag);
+        }
+
+        function updateTabsActive(){
+            const s = document.getElementById('statusFilter').value;
+            const tabs = document.querySelectorAll('#statusTabs .tab');
+            tabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-status') === s));
+        }
+    </script>
+    <script src="assets/js/navigation.js"></script>
+</body>
+</html>

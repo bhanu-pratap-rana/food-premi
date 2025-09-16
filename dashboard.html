@@ -55,6 +55,21 @@
                         <div class="item-prices"><div class="price-option"><div class="size-label">Total</div><div class="price" id="reviewsCount">-</div></div></div>
                     </div>
                 </div>
+                <div class="menu-item">
+                    <div class="item-content">
+                        <h3 class="item-name"><i class="fas fa-receipt"></i> Orders</h3>
+                        <p class="item-description">All orders</p>
+                        <div class="item-prices"><div class="price-option"><div class="size-label">Total</div><div class="price" id="ordersCount">-</div></div></div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-content">
+                        <h3 class="item-name"><i class="fas fa-clock"></i> Pending</h3>
+                        <p class="item-description">Placed+Accepted+Preparing</p>
+                        <div class="item-prices"><div class="price-option"><div class="size-label">Now</div><div class="price" id="pendingCount">-</div></div></div>
+                        <div style="margin-top:8px;"><a class="nav-link" href="admin-orders.html"><i class="fas fa-arrow-right"></i> Manage orders</a></div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -80,6 +95,12 @@
             document.getElementById('usersCount').textContent = res.counts.users;
             document.getElementById('blogsCount').textContent = res.counts.blogs;
             document.getElementById('reviewsCount').textContent = res.counts.reviews;
+            if (res.counts.orders !== undefined) {
+                document.getElementById('ordersCount').textContent = res.counts.orders;
+                const ob = res.counts.orders_by_status || {};
+                const pending = (ob.placed||0) + (ob.accepted||0) + (ob.preparing||0);
+                document.getElementById('pendingCount').textContent = pending;
+            }
         }
 
         document.addEventListener('DOMContentLoaded', async ()=>{

@@ -225,5 +225,67 @@
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/navigation.js"></script>
+    <script>
+        // Fully dynamic blog: replace static content with API data
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const res = await fetch('/api/blogs');
+                const json = await res.json();
+                if (!json.success || !Array.isArray(json.data)) return;
+                const posts = json.data;
+
+                const featuredWrap = document.querySelector('.featured-post');
+                const grid = document.querySelector('.posts-grid');
+                if (!grid) return;
+                grid.innerHTML = '';
+
+                if (featuredWrap){
+                    if (posts.length > 0){
+                        const top = posts[0];
+                        featuredWrap.innerHTML = `
+                            <h2 class="section-title">Today's Featured Article</h2>
+                            <article class="blog-post featured">
+                                <div class="post-image">
+                                    <img src="${top.image || ''}" alt="${top.title || ''}">
+                                </div>
+                                <div class="post-content">
+                                    <div class="post-meta">
+                                        <span class="post-date"><i class="fas fa-calendar"></i> ${top.created_at || ''}</span>
+                                        <span class="post-category">${top.category || ''}</span>
+                                    </div>
+                                    <h3 class="post-title">${top.title || ''}</h3>
+                                    <p class="post-excerpt">${top.excerpt || ''}</p>
+                                </div>
+                            </article>`;
+                    } else {
+                        featuredWrap.style.display = 'none';
+                    }
+                }
+
+                const rest = posts.slice(1);
+                const frag = document.createDocumentFragment();
+                rest.forEach(p => {
+                    const art = document.createElement('article');
+                    art.className = 'blog-post';
+                    art.innerHTML = `
+                        <div class="post-image">
+                            <img src="${p.image || ''}" alt="${p.title || ''}">
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="post-date"><i class="fas fa-calendar"></i> ${p.created_at || ''}</span>
+                                <span class="post-category">${p.category || ''}</span>
+                            </div>
+                            <h3 class="post-title">${p.title || ''}</h3>
+                            <p class="post-excerpt">${p.excerpt || ''}</p>
+                        </div>`;
+                    frag.appendChild(art);
+                });
+                grid.appendChild(frag);
+            } catch (e) {
+                console.warn('Blog load failed:', e);
+            }
+        });
+    </script>
 </body>
 </html>

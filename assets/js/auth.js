@@ -378,8 +378,11 @@ function hideAlert() {
 
 // Social login handlers (placeholder)
 document.addEventListener('click', function(e) {
-    if (e.target.closest('.social-btn.google')) {
-        showAlert('warning', 'Google login will be available soon!', 'fab fa-google');
+    const btn = e.target.closest('.social-btn.google');
+    if (btn) {
+        // Redirect to backend OAuth flow; include current page as 'next'
+        const nextUrl = window.location.href;
+        window.location.href = `${API_BASE.replace(/\/api$/, '')}/api/oauth/google/login?next=${encodeURIComponent(nextUrl)}`;
     }
 });
 

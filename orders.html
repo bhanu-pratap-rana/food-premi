@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders - Food Premi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .orders-list { display: grid; gap: 16px; }
+        .order-card { background: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); padding: 16px; }
+        .order-header { display:flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .order-id { font-weight: 600; color: #1A5334; }
+        .order-meta { color: #666; font-size: 13px; }
+        .order-items { margin-top: 10px; font-size: 14px; }
+        .order-item { display:flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #eee; }
+        .order-item:last-child { border-bottom: none; }
+        .order-total { margin-top: 10px; font-weight: 600; display:flex; justify-content: flex-end; }
+        .status { padding: 4px 8px; border-radius: 999px; font-size: 12px; background: #e8f5e9; color: #1b5e20; }
+        .empty { text-align:center; color:#666; padding: 30px 0; }
+    </style>
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Expires" content="Sat, 01 Jan 2000 00:00:00 GMT" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://i.pinimg.com/736x/4d/89/c4/4d89c41c38b792db350d2b56096c9a5d.jpg" alt="Food Premi Logo">
+                </div>
+                <h1>Your Orders</h1>
+                <p class="tagline-motto">Track your healthy meals</p>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link"><i class="fas fa-utensils"></i> Menu</a>
+                    <a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <div class="auth-links" id="authLinks"></div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="category-section">
+            <h2 class="category-title">Order History</h2>
+            <div id="ordersContainer" class="orders-list"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p style="text-align:center;padding:20px;">© 2025 FoodPremi</p>
+    </footer>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+
+        async function ensureLoggedIn() {
+            const res = await fetch(`${API_BASE}/auth-status`).then(r=>r.json()).catch(()=>({logged_in:false}));
+            if (!res.logged_in) {
+                const el = document.getElementById('ordersContainer');
+                el.innerHTML = `<div class="empty"><p><i class="fas fa-lock"></i> Please <a href='login.html'>login</a> to view your orders.</p></div>`;
+                throw new Error('Not logged in');
+            }
+            return res;
+        }
+
+        function fmtDate(iso) {
+            try { return new Date(iso).toLocaleString(); } catch { return iso || ''; }
+        }
+
+        function renderOrders(list) {
+            const el = document.getElementById('ordersContainer');
+            if (!list || list.length === 0) {
+                el.innerHTML = `<div class="empty"><p><i class=\"fas fa-receipt\"></i> No orders yet.</p></div>`;
+                return;
+            }
+            el.innerHTML = '';
+            list.forEach(o => {
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                const total = (o.total_amount != null ? o.total_amount : 0);
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #${o._id}</div>
+                            <div class="order-meta">${fmtDate(o.created_at)} • ${o.user_name || ''}</div>
+                        </div>
+                        <div class="status">${o.status || 'placed'}</div>
+                    </div>
+                    <div class="order-items">
+                        ${(o.items||[]).map(it => `<div class='order-item'><span>${it.name} (${it.size}) x ${it.quantity}</span><span>Rs ${it.price * it.quantity}</span></div>`).join('')}
+                    </div>
+                    <div class="order-total">Total: Rs ${total}</div>
+                `;
+                el.appendChild(card);
+            });
+        }
+
+        async function loadOrders() {
+            try {
+                await ensureLoggedIn();
+                const res = await fetch(`${API_BASE}/orders`).then(r=>r.json());
+                if (!res.success) throw new Error(res.message || 'Failed to load');
+                renderOrders(res.data);
+            } catch (e) {
+                console.warn('Orders load issue:', e.message);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOrders);
+    </script>
+    <script src="assets/js/navigation.js"></script>
+</body>
+</html>
+

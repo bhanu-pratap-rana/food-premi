@@ -1,0 +1,576 @@
+{
+  "restaurant_info": {
+    "name": "Food Premi",
+    "tagline": "Naturally Nutritious",
+    "description": "Fresh, organic, locally-sourced healthy meals"
+  },
+  "menu_categories": [
+    {
+      "category_id": "healthy_bowls",
+      "category_name": "Healthy Power Bowls",
+      "description": "Nutrient-dense bowls packed with superfoods and organic ingredients",
+      "items": [
+        {
+          "id": "bowl_001",
+          "name": "Quinoa Power Bowl",
+          "description": "Organic quinoa, roasted sweet potato, steamed broccoli, chickpeas, avocado, hemp seeds, tahini dressing. High in protein, fiber, and healthy fats.",
+          "ingredients": ["organic quinoa", "sweet potato", "broccoli", "chickpeas", "avocado", "hemp seeds", "tahini"],
+          "allergens": ["sesame"],
+          "dietary_tags": ["vegan", "gluten-free", "high-protein"],
+          "nutrition": {
+            "calories": 520,
+            "protein": "18g",
+            "carbs": "65g",
+            "fat": "22g",
+            "fiber": "12g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 12.99,
+              "portion": "400g"
+            },
+            "large": {
+              "price": 15.99,
+              "portion": "550g"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "8-10 minutes"
+        },
+        {
+          "id": "bowl_002",
+          "name": "Mediterranean Bowl",
+          "description": "Brown rice, grilled organic chicken, cucumber, cherry tomatoes, red onion, kalamata olives, feta cheese, hummus, olive oil lemon dressing.",
+          "ingredients": ["brown rice", "organic chicken breast", "cucumber", "cherry tomatoes", "red onion", "kalamata olives", "feta cheese", "hummus"],
+          "allergens": ["dairy"],
+          "dietary_tags": ["gluten-free", "high-protein", "mediterranean"],
+          "nutrition": {
+            "calories": 485,
+            "protein": "32g",
+            "carbs": "45g",
+            "fat": "18g",
+            "fiber": "8g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 13.99,
+              "portion": "450g"
+            },
+            "large": {
+              "price": 16.99,
+              "portion": "600g"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "12-15 minutes"
+        },
+        {
+          "id": "bowl_003",
+          "name": "Green Goddess Bowl",
+          "description": "Massaged kale, spinach, steamed broccoli, edamame, cucumber, avocado, pumpkin seeds, green goddess dressing with herbs and tahini.",
+          "ingredients": ["organic kale", "spinach", "broccoli", "edamame", "cucumber", "avocado", "pumpkin seeds"],
+          "allergens": ["sesame"],
+          "dietary_tags": ["vegan", "gluten-free", "detox", "superfood"],
+          "nutrition": {
+            "calories": 395,
+            "protein": "15g",
+            "carbs": "28g",
+            "fat": "28g",
+            "fiber": "15g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 11.99,
+              "portion": "380g"
+            },
+            "large": {
+              "price": 14.99,
+              "portion": "500g"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "6-8 minutes"
+        }
+      ]
+    },
+    {
+      "category_id": "organic_salads",
+      "category_name": "Organic Fresh Salads",
+      "description": "Crisp, fresh salads made with certified organic greens and vegetables",
+      "items": [
+        {
+          "id": "salad_001",
+          "name": "Farm Fresh Garden Salad",
+          "description": "Mixed organic greens, cherry tomatoes, carrots, bell peppers, cucumber, red cabbage, sunflower seeds, olive oil vinaigrette.",
+          "ingredients": ["mixed organic greens", "cherry tomatoes", "carrots", "bell peppers", "cucumber", "red cabbage", "sunflower seeds"],
+          "allergens": [],
+          "dietary_tags": ["vegan", "gluten-free", "raw", "light"],
+          "nutrition": {
+            "calories": 185,
+            "protein": "6g",
+            "carbs": "18g",
+            "fat": "12g",
+            "fiber": "8g"
+          },
+          "sizes": {
+            "side": {
+              "price": 6.99,
+              "portion": "150g"
+            },
+            "regular": {
+              "price": 9.99,
+              "portion": "250g"
+            },
+            "large": {
+              "price": 12.99,
+              "portion": "350g"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "5-7 minutes"
+        },
+        {
+          "id": "salad_002",
+          "name": "Protein Power Salad",
+          "description": "Baby spinach, grilled wild-caught salmon, quinoa, walnuts, dried cranberries, goat cheese, lemon herb dressing.",
+          "ingredients": ["organic baby spinach", "wild salmon", "quinoa", "walnuts", "dried cranberries", "goat cheese"],
+          "allergens": ["fish", "dairy", "nuts"],
+          "dietary_tags": ["gluten-free", "high-protein", "omega-3"],
+          "nutrition": {
+            "calories": 445,
+            "protein": "28g",
+            "carbs": "25g",
+            "fat": "26g",
+            "fiber": "6g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 15.99,
+              "portion": "300g"
+            },
+            "large": {
+              "price": 18.99,
+              "portion": "400g"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "10-12 minutes"
+        },
+        {
+          "id": "salad_003",
+          "name": "Detox Rainbow Salad",
+          "description": "Arugula, shredded beets, carrots, purple cabbage, sprouts, pumpkin seeds, ginger turmeric dressing. Perfect for cleansing and anti-inflammatory benefits.",
+          "ingredients": ["organic arugula", "beets", "carrots", "purple cabbage", "alfalfa sprouts", "pumpkin seeds", "fresh ginger", "turmeric"],
+          "allergens": [],
+          "dietary_tags": ["vegan", "gluten-free", "detox", "anti-inflammatory"],
+          "nutrition": {
+            "calories": 220,
+            "protein": "8g",
+            "carbs": "22g",
+            "fat": "14g",
+            "fiber": "10g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 10.99,
+              "portion": "280g"
+            },
+            "large": {
+              "price": 13.99,
+              "portion": "380g"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "7-9 minutes"
+        }
+      ]
+    },
+    {
+      "category_id": "wholesome_mains",
+      "category_name": "Wholesome Main Dishes",
+      "description": "Hearty, nutritious main courses featuring premium organic proteins",
+      "items": [
+        {
+          "id": "main_001",
+          "name": "Grass-Fed Beef & Roasted Vegetables",
+          "description": "6oz grass-fed beef sirloin, roasted seasonal vegetables (zucchini, bell peppers, onions), herb-roasted sweet potatoes, chimichurri sauce.",
+          "ingredients": ["grass-fed beef sirloin", "zucchini", "bell peppers", "onions", "sweet potatoes", "fresh herbs"],
+          "allergens": [],
+          "dietary_tags": ["gluten-free", "paleo", "high-protein", "grass-fed"],
+          "nutrition": {
+            "calories": 520,
+            "protein": "42g",
+            "carbs": "35g",
+            "fat": "22g",
+            "fiber": "8g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 22.99,
+              "portion": "6oz protein + 200g vegetables"
+            },
+            "large": {
+              "price": 27.99,
+              "portion": "8oz protein + 250g vegetables"
+            }
+          },
+          "availability": "lunch_dinner",
+          "preparation_time": "15-20 minutes"
+        },
+        {
+          "id": "main_002",
+          "name": "Wild-Caught Salmon with Quinoa",
+          "description": "Pan-seared Atlantic salmon, tri-color quinoa pilaf, steamed asparagus, lemon dill sauce. Rich in omega-3 fatty acids.",
+          "ingredients": ["wild Atlantic salmon", "tri-color quinoa", "asparagus", "fresh dill", "lemon"],
+          "allergens": ["fish"],
+          "dietary_tags": ["gluten-free", "high-protein", "omega-3", "heart-healthy"],
+          "nutrition": {
+            "calories": 485,
+            "protein": "38g",
+            "carbs": "32g",
+            "fat": "20g",
+            "fiber": "6g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 19.99,
+              "portion": "5oz salmon + sides"
+            },
+            "large": {
+              "price": 24.99,
+              "portion": "7oz salmon + sides"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "12-15 minutes"
+        },
+        {
+          "id": "main_003",
+          "name": "Free-Range Chicken & Sweet Potato",
+          "description": "Herb-marinated free-range chicken breast, mashed sweet potato with coconut milk, sautéed organic green beans, rosemary jus.",
+          "ingredients": ["free-range chicken breast", "sweet potato", "coconut milk", "organic green beans", "fresh rosemary"],
+          "allergens": [],
+          "dietary_tags": ["gluten-free", "paleo", "high-protein", "free-range"],
+          "nutrition": {
+            "calories": 465,
+            "protein": "35g",
+            "carbs": "28g",
+            "fat": "16g",
+            "fiber": "6g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 17.99,
+              "portion": "5oz chicken + sides"
+            },
+            "large": {
+              "price": 21.99,
+              "portion": "7oz chicken + sides"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "12-15 minutes"
+        },
+        {
+          "id": "main_004",
+          "name": "Plant-Based Buddha Bowl",
+          "description": "Lentil and mushroom patty, brown rice, roasted vegetables, tahini sauce, microgreens. Complete plant-based protein.",
+          "ingredients": ["organic lentils", "mushrooms", "brown rice", "roasted vegetables", "tahini", "microgreens"],
+          "allergens": ["sesame"],
+          "dietary_tags": ["vegan", "gluten-free", "high-protein", "plant-based"],
+          "nutrition": {
+            "calories": 420,
+            "protein": "18g",
+            "carbs": "55g",
+            "fat": "16g",
+            "fiber": "14g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 14.99,
+              "portion": "400g"
+            },
+            "large": {
+              "price": 17.99,
+              "portion": "550g"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "10-12 minutes"
+        }
+      ]
+    },
+    {
+      "category_id": "smoothie_bowls",
+      "category_name": "Superfood Smoothie Bowls",
+      "description": "Thick, creamy smoothie bowls topped with fresh fruits and superfoods",
+      "items": [
+        {
+          "id": "smoothie_001",
+          "name": "Açaí Berry Bowl",
+          "description": "Organic açaí blend, banana, blueberries, topped with granola, coconut flakes, chia seeds, fresh berries.",
+          "ingredients": ["organic açaí", "banana", "blueberries", "homemade granola", "coconut flakes", "chia seeds"],
+          "allergens": ["nuts"],
+          "dietary_tags": ["vegan", "gluten-free", "antioxidant-rich", "superfood"],
+          "nutrition": {
+            "calories": 385,
+            "protein": "8g",
+            "carbs": "68g",
+            "fat": "12g",
+            "fiber": "12g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 11.99,
+              "portion": "350ml base + toppings"
+            },
+            "large": {
+              "price": 14.99,
+              "portion": "500ml base + extra toppings"
+            }
+          },
+          "availability": "breakfast_brunch",
+          "preparation_time": "5-7 minutes"
+        },
+        {
+          "id": "smoothie_002",
+          "name": "Green Machine Bowl",
+          "description": "Spinach, mango, pineapple, coconut milk blend, topped with kiwi, hemp seeds, cacao nibs, coconut.",
+          "ingredients": ["organic spinach", "mango", "pineapple", "coconut milk", "kiwi", "hemp seeds", "cacao nibs"],
+          "allergens": [],
+          "dietary_tags": ["vegan", "gluten-free", "detox", "vitamin-c"],
+          "nutrition": {
+            "calories": 325,
+            "protein": "6g",
+            "carbs": "58g",
+            "fat": "10g",
+            "fiber": "8g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 10.99,
+              "portion": "350ml base + toppings"
+            },
+            "large": {
+              "price": 13.99,
+              "portion": "500ml base + extra toppings"
+            }
+          },
+          "availability": "breakfast_brunch",
+          "preparation_time": "5-7 minutes"
+        }
+      ]
+    },
+    {
+      "category_id": "fresh_juices",
+      "category_name": "Cold-Pressed Juices",
+      "description": "Fresh, cold-pressed juices made daily from organic fruits and vegetables",
+      "items": [
+        {
+          "id": "juice_001",
+          "name": "Green Detox",
+          "description": "Kale, spinach, cucumber, celery, green apple, lemon, ginger. Perfect for cleansing and energy.",
+          "ingredients": ["organic kale", "spinach", "cucumber", "celery", "green apple", "lemon", "ginger"],
+          "allergens": [],
+          "dietary_tags": ["vegan", "gluten-free", "detox", "raw"],
+          "nutrition": {
+            "calories": 85,
+            "protein": "3g",
+            "carbs": "18g",
+            "fat": "0g",
+            "fiber": "0g"
+          },
+          "sizes": {
+            "small": {
+              "price": 6.99,
+              "portion": "250ml"
+            },
+            "large": {
+              "price": 8.99,
+              "portion": "400ml"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "3-5 minutes"
+        },
+        {
+          "id": "juice_002",
+          "name": "Immunity Boost",
+          "description": "Orange, carrot, ginger, turmeric, lemon. High in vitamin C and anti-inflammatory compounds.",
+          "ingredients": ["organic oranges", "carrots", "fresh ginger", "turmeric", "lemon"],
+          "allergens": [],
+          "dietary_tags": ["vegan", "gluten-free", "immunity", "anti-inflammatory"],
+          "nutrition": {
+            "calories": 95,
+            "protein": "2g",
+            "carbs": "22g",
+            "fat": "0g",
+            "fiber": "0g"
+          },
+          "sizes": {
+            "small": {
+              "price": 6.99,
+              "portion": "250ml"
+            },
+            "large": {
+              "price": 8.99,
+              "portion": "400ml"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "3-5 minutes"
+        }
+      ]
+    },
+    {
+      "category_id": "healthy_snacks",
+      "category_name": "Healthy Snacks & Sides",
+      "description": "Nutritious snacks and sides to complement your meal",
+      "items": [
+        {
+          "id": "snack_001",
+          "name": "Energy Balls",
+          "description": "House-made energy balls with dates, almonds, coconut, cacao. Pack of 3.",
+          "ingredients": ["organic dates", "almonds", "coconut", "raw cacao", "chia seeds"],
+          "allergens": ["nuts"],
+          "dietary_tags": ["vegan", "gluten-free", "raw", "energy"],
+          "nutrition": {
+            "calories": 180,
+            "protein": "5g",
+            "carbs": "22g",
+            "fat": "8g",
+            "fiber": "4g"
+          },
+          "sizes": {
+            "pack_of_3": {
+              "price": 4.99,
+              "portion": "3 balls (60g)"
+            }
+          },
+          "availability": "all_day",
+          "preparation_time": "1 minute"
+        },
+        {
+          "id": "snack_002",
+          "name": "Avocado Toast",
+          "description": "Organic sourdough, mashed avocado, hemp seeds, everything seasoning, microgreens.",
+          "ingredients": ["organic sourdough bread", "avocado", "hemp seeds", "everything seasoning", "microgreens"],
+          "allergens": ["gluten", "sesame"],
+          "dietary_tags": ["vegetarian", "healthy-fats"],
+          "nutrition": {
+            "calories": 285,
+            "protein": "8g",
+            "carbs": "28g",
+            "fat": "18g",
+            "fiber": "10g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 7.99,
+              "portion": "2 slices"
+            }
+          },
+          "availability": "breakfast_brunch",
+          "preparation_time": "3-4 minutes"
+        }
+      ]
+    },
+    {
+      "category_id": "beverages",
+      "category_name": "Healthy Beverages",
+      "description": "Refreshing and nourishing drinks",
+      "items": [
+        {
+          "id": "bev_001",
+          "name": "Kombucha",
+          "description": "House-made organic kombucha. Available in Ginger Turmeric or Berry flavors.",
+          "ingredients": ["organic tea", "organic sugar", "SCOBY", "natural flavors"],
+          "allergens": [],
+          "dietary_tags": ["vegan", "gluten-free", "probiotic", "fermented"],
+          "nutrition": {
+            "calories": 35,
+            "protein": "0g",
+            "carbs": "8g",
+            "fat": "0g",
+            "fiber": "0g"
+          },
+          "sizes": {
+            "regular": {
+              "price": 4.99,
+              "portion": "330ml"
+            }
+          },
+          "flavors": ["Ginger Turmeric", "Mixed Berry"],
+          "availability": "all_day",
+          "preparation_time": "1 minute"
+        },
+        {
+          "id": "bev_002",
+          "name": "Herbal Tea",
+          "description": "Organic herbal teas. Choose from Chamomile, Peppermint, or Green Tea.",
+          "ingredients": ["organic tea leaves"],
+          "allergens": [],
+          "dietary_tags": ["vegan", "gluten-free", "caffeine-free", "organic"],
+          "nutrition": {
+            "calories": 0,
+            "protein": "0g",
+            "carbs": "0g",
+            "fat": "0g",
+            "fiber": "0g"
+          },
+          "sizes": {
+            "cup": {
+              "price": 2.99,
+              "portion": "250ml"
+            },
+            "pot": {
+              "price": 4.99,
+              "portion": "500ml"
+            }
+          },
+          "varieties": ["Chamomile", "Peppermint", "Green Tea", "Ginger Lemon"],
+          "availability": "all_day",
+          "preparation_time": "3-5 minutes"
+        }
+      ]
+    }
+  ],
+  "meal_plans": {
+    "daily_specials": {
+      "monday": "20% off all Green Goddess Bowls",
+      "tuesday": "Buy 2 Cold-Pressed Juices, Get 1 Free",
+      "wednesday": "Wellness Wednesday - 15% off all meals",
+      "thursday": "Protein Thursday - Free protein upgrade",
+      "friday": "Fresh Friday - 10% off all salads",
+      "weekend": "Brunch Special - $2 off smoothie bowls"
+    }
+  },
+  "operating_hours": {
+    "monday": "11:00 AM - 9:00 PM",
+    "tuesday": "11:00 AM - 9:00 PM",
+    "wednesday": "11:00 AM - 9:00 PM",
+    "thursday": "11:00 AM - 9:00 PM",
+    "friday": "11:00 AM - 9:00 PM",
+    "saturday": "10:00 AM - 10:00 PM",
+    "sunday": "10:00 AM - 8:00 PM"
+  },
+  "availability_codes": {
+    "all_day": "Available throughout operating hours",
+    "breakfast_brunch": "Available until 2:00 PM",
+    "lunch_dinner": "Available from 11:30 AM onwards"
+  },
+  "dietary_information": {
+    "symbols": {
+      "🌱": "Vegan",
+      "🥛": "Vegetarian",
+      "🌾": "Gluten-Free",
+      "🥜": "Contains Nuts",
+      "🐟": "Contains Fish",
+      "🧀": "Contains Dairy",
+      "🌿": "Organic",
+      "💪": "High Protein",
+      "🔥": "Spicy",
+      "❄️": "Raw Food"
+    }
+  }
+}
